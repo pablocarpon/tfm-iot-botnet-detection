@@ -264,12 +264,67 @@ notebooks/
 
 #### Propósito
 
-Contiene la implementación principal del software experimental.
+Contiene el código fuente del proyecto.
 
-Todo el código reutilizable del proyecto debe vivir aquí.
+A diferencia del resto de directorios del repositorio, `src` no se utiliza para organizar experimentos ni almacenar resultados, sino para contener la implementación reutilizable del sistema.
+
+El código se organiza como un paquete Python editable denominado `iotbotnet`.
 
 ```text
 src/
+└── iotbotnet/
+    ├── data/
+    ├── models/
+    ├── adaptation/
+    ├── evaluation/
+    ├── experiments/
+    └── utils/
+```
+
+Esta organización permite instalar el proyecto localmente mediante:
+
+```bash
+pip install -e .
+```
+
+Una vez instalado, cualquier módulo puede importarse desde cualquier parte del proyecto utilizando el nombre del paquete:
+
+```python
+from iotbotnet.models.autoencoder import Autoencoder
+
+from iotbotnet.data.loaders import load_nbaiot
+
+from iotbotnet.evaluation.metrics import compute_metrics
+```
+
+Esto evita dependencias de rutas relativas y facilita la reutilización del código entre notebooks, scripts y futuros experimentos.
+
+---
+
+### src/iotbotnet/
+
+**Estado:** Actual
+
+#### Propósito
+
+Actúa como paquete principal del proyecto.
+
+Todos los módulos desarrollados para el TFM deben encontrarse dentro de este directorio.
+
+Su existencia no responde a una necesidad organizativa adicional respecto a `src`, sino a la necesidad de disponer de un paquete Python instalable y reutilizable.
+
+Gracias a ello, el código puede importarse mediante:
+
+```python
+from iotbotnet.models.autoencoder import Autoencoder
+```
+
+en lugar de depender de rutas relativas o de la estructura física del repositorio.
+
+#### Contenido esperado
+
+```text
+iotbotnet/
 ├── data/
 ├── models/
 ├── adaptation/
@@ -280,7 +335,7 @@ src/
 
 ---
 
-### src/data/
+### src/iotbotnet/data/
 
 **Estado:** Actual
 
@@ -320,7 +375,7 @@ leave_one_device_out_split()
 
 ---
 
-### src/models/
+### src/iotbotnet/models/
 
 **Estado:** Actual
 
@@ -356,7 +411,7 @@ model = LocalOutlierFactor(...)
 
 ---
 
-### src/adaptation/
+### src/iotbotnet/adaptation/
 
 **Estado:** Previsto
 
@@ -396,7 +451,7 @@ Cuando comiencen los experimentos relacionados con:
 
 ---
 
-### src/evaluation/
+### src/iotbotnet/evaluation/
 
 **Estado:** Actual
 
@@ -439,7 +494,7 @@ Cuando se incorporen nuevas métricas de evaluación.
 
 ---
 
-### src/experiments/
+### src/iotbotnet/experiments/
 
 **Estado:** Actual
 
@@ -478,7 +533,7 @@ run_experiment(config)
 
 ---
 
-### src/utils/
+### src/iotbotnet/utils/
 
 **Estado:** Actual
 
@@ -680,19 +735,19 @@ configs/experiments/
 
 ### Paso 4
 
-`src/data/` carga los datos y genera las particiones necesarias.
+`src/iotbotnet/data/` carga los datos y genera las particiones necesarias.
 
 ### Paso 5
 
-`src/models/` entrena el modelo correspondiente.
+`src/iotbotnet/models/` entrena el modelo correspondiente.
 
 ### Paso 6
 
-`src/adaptation/` aplica la adaptación ligera.
+`src/iotbotnet/adaptation/` aplica la adaptación ligera.
 
 ### Paso 7
 
-`src/evaluation/` calcula las métricas.
+`src/iotbotnet/evaluation/` calcula las métricas.
 
 ### Paso 8
 
