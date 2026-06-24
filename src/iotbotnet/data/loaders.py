@@ -18,9 +18,11 @@ import gc
 from pathlib import Path
 
 import kagglehub
+from kagglehub import KaggleDatasetAdapter
 import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
+from tqdm.auto import tqdm
 
 
 def parse_nbaiot_filename(file_name: str | Path) -> dict:
@@ -57,6 +59,7 @@ def load_nbaiot_csv_file(
     únicamente al archivo indicado mediante `path=file_name`.
     """
     df = kagglehub.dataset_load(
+        KaggleDatasetAdapter.PANDAS,
         repository_path,
         path=file_name,
     )
@@ -95,7 +98,7 @@ def create_nbaiot_device_parquets(
     initialized_devices: set[int] = set()
 
     try:
-        for file_name in input_csv_file_names:
+        for file_name in tqdm(input_csv_file_names, desc="Creating base Parquet files"):
             metadata = parse_nbaiot_filename(file_name)
             device_id = metadata["device_id"]
 
@@ -108,12 +111,18 @@ def create_nbaiot_device_parquets(
 
             df = load_nbaiot_csv_file(repository_path, file_name)
 
-            feature_columns = df.columns
-            df[feature_columns] = df[feature_columns].astype("float32")
+            df = df.astype("float32", copy=False)
 
-            df["is_attack"] = metadata["is_attack"]
-            df["attack_family"] = metadata["attack_family"]
-            df["attack_type"] = metadata["attack_type"]
+            metadata_df = pd.DataFrame(
+                {
+                    "is_attack": metadata["is_attack"],
+                    "attack_family": metadata["attack_family"],
+                    "attack_type": metadata["attack_type"],
+                },
+                index=df.index,
+            )
+
+            df = pd.concat([df, metadata_df], axis=1)
 
             table = pa.Table.from_pandas(
                 df,
