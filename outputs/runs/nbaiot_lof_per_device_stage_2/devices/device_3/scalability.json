@@ -1,0 +1,7 @@
+{
+  "model_size_mb": 21.5687,
+  "n_models": 1,
+  "n_train": 23460,
+  "n_test_benign": 7820,
+  "n_test_attack": 316400
+}

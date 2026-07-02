@@ -1,0 +1,101 @@
+{
+  "experiment_name": "nbaiot_lof_per_device_stage_1",
+  "dataset": "nbaiot",
+  "model": "lof",
+  "strategy": "per_device",
+  "seed": 42,
+  "n_devices": 9,
+  "objective": "minimize_p99_validation_score_per_device",
+  "devices": {
+    "device_1": {
+      "best_value": 2.984036684036255,
+      "best_params": {
+        "n_neighbors": 21,
+        "metric": "euclidean",
+        "n_jobs": 1
+      },
+      "n_trials": 10,
+      "n_features": 115
+    },
+    "device_2": {
+      "best_value": 6.219035625457764,
+      "best_params": {
+        "n_neighbors": 124,
+        "metric": "euclidean",
+        "n_jobs": 1
+      },
+      "n_trials": 10,
+      "n_features": 115
+    },
+    "device_3": {
+      "best_value": 15.413269996643066,
+      "best_params": {
+        "n_neighbors": 124,
+        "metric": "euclidean",
+        "n_jobs": 1
+      },
+      "n_trials": 10,
+      "n_features": 115
+    },
+    "device_4": {
+      "best_value": 2.08487868309021,
+      "best_params": {
+        "n_neighbors": 21,
+        "metric": "euclidean",
+        "n_jobs": 1
+      },
+      "n_trials": 10,
+      "n_features": 115
+    },
+    "device_5": {
+      "best_value": 2.602590560913086,
+      "best_params": {
+        "n_neighbors": 21,
+        "metric": "euclidean",
+        "n_jobs": 1
+      },
+      "n_trials": 10,
+      "n_features": 115
+    },
+    "device_6": {
+      "best_value": 2.449009418487549,
+      "best_params": {
+        "n_neighbors": 21,
+        "metric": "euclidean",
+        "n_jobs": 1
+      },
+      "n_trials": 10,
+      "n_features": 115
+    },
+    "device_7": {
+      "best_value": 3.7892568111419678,
+      "best_params": {
+        "n_neighbors": 21,
+        "metric": "euclidean",
+        "n_jobs": 1
+      },
+      "n_trials": 10,
+      "n_features": 115
+    },
+    "device_8": {
+      "best_value": 3.24676251411438,
+      "best_params": {
+        "n_neighbors": 21,
+        "metric": "euclidean",
+        "n_jobs": 1
+      },
+      "n_trials": 10,
+      "n_features": 115
+    },
+    "device_9": {
+      "best_value": 5.862610340118408,
+      "best_params": {
+        "n_neighbors": 21,
+        "metric": "euclidean",
+        "n_jobs": 1
+      },
+      "n_trials": 10,
+      "n_features": 115
+    }
+  }
+}

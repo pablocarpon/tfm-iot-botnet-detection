@@ -1,0 +1,5 @@
+{
+  "n_neighbors": 124,
+  "metric": "euclidean",
+  "n_jobs": 1
+}

@@ -1,0 +1,49 @@
+experiment:
+  name: nbaiot_lof_per_device_stage_2
+  dataset: nbaiot
+  model: lof
+  strategy: per_device
+  seed: 42
+
+paths:
+  data_dir: data/processed/n_baiot/scaled/per_device
+  stage_1_run_dir: outputs/runs/nbaiot_lof_per_device_stage_1
+
+outputs:
+  output_dir: outputs/runs/nbaiot_lof_per_device_stage_2
+  overwrite: false
+
+devices:
+  - device_1
+  - device_2
+  - device_3
+  - device_4
+  - device_5
+  - device_6
+  - device_7
+  - device_8
+  - device_9
+
+data:
+  train_file: train.parquet
+  test_benign_file: test_benign.parquet
+  test_attack_file: test_attack.parquet
+  metadata_columns:
+    - is_attack
+    - attack_family
+    - attack_type
+
+thresholds:
+  device_1: 2.9840
+  device_2: 6.2190
+  device_3: 15.4133
+  device_4: 2.0849
+  device_5: 2.6026
+  device_6: 2.4490
+  device_7: 3.7893
+  device_8: 3.2468
+  device_9: 5.8626
+
+runtime:
+  log_level: INFO
+  batch_size: 100000

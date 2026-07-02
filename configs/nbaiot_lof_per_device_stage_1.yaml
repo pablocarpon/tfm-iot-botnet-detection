@@ -1,0 +1,53 @@
+experiment:
+  name: nbaiot_lof_per_device_stage_1
+  dataset: nbaiot
+  strategy: per_device
+  seed: 42
+
+paths:
+  data_dir: data/processed/n_baiot/scaled/per_device
+
+outputs:
+  output_dir: outputs/runs/nbaiot_lof_per_device_stage_1
+  overwrite: false
+
+runtime:
+  log_level: INFO
+
+devices:
+  - device_1
+  - device_2
+  - device_3
+  - device_4
+  - device_5
+  - device_6
+  - device_7
+  - device_8
+  - device_9
+
+data:
+  train_file: train.parquet
+  val_file: val.parquet
+  metadata_columns:
+    - is_attack
+    - attack_family
+    - attack_type
+
+optimization:
+  n_trials: 10
+  objective_quantile: 0.99
+  sampler: tpe
+
+search_space:
+  n_neighbors:
+    low: 10
+    high: 200
+  metric:
+    choices:
+      - euclidean
+      - manhattan
+
+model:
+  type: lof
+  fixed_params:
+    n_jobs: 1
