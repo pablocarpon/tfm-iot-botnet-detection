@@ -32,6 +32,7 @@ def make_tf_dataset_from_parquet(
     batch_size: int = 4096,
     shuffle: bool = False,
     shuffle_buffer_size: int = 50_000,
+    prefetch: bool = True,
 ) -> tf.data.Dataset:
     """Crea un tf.data.Dataset eficiente desde un archivo Parquet."""
 
@@ -52,10 +53,11 @@ def make_tf_dataset_from_parquet(
 
     if shuffle:
         dataset = dataset.unbatch()
-        dataset = dataset.shuffle(shuffle_buffer_size)
+        dataset = dataset.shuffle(shuffle_buffer_size, reshuffle_each_iteration=True)
         dataset = dataset.batch(batch_size)
 
-    dataset = dataset.prefetch(tf.data.AUTOTUNE)
+    if prefetch:
+        dataset = dataset.prefetch(tf.data.AUTOTUNE)
 
     return dataset
 
@@ -66,6 +68,8 @@ def make_autoencoder_dataset_from_parquet(
     *,
     batch_size: int = 4096,
     shuffle: bool = False,
+    shuffle_buffer_size: int = 50_000,
+    prefetch: bool = True,
 ) -> tf.data.Dataset:
     """Crea un dataset (X, X) para entrenar autoencoders."""
 
@@ -74,6 +78,8 @@ def make_autoencoder_dataset_from_parquet(
         feature_columns=feature_columns,
         batch_size=batch_size,
         shuffle=shuffle,
+        shuffle_buffer_size=shuffle_buffer_size,
+        prefetch=prefetch,
     )
 
     return dataset.map(lambda x: (x, x), num_parallel_calls=tf.data.AUTOTUNE)
