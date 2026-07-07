@@ -1,0 +1,47 @@
+{
+  "n_features": 115,
+  "n_trials": 10,
+  "best_objective_value": 0.17812542617321014,
+  "final_model_validation_objective": 0.17565865814685822,
+  "objective_quantile": 0.99,
+  "best_epoch": 80,
+  "best_val_loss": 0.028101995587348938,
+  "best_params": {
+    "type": "autoencoder",
+    "hidden_dims": [
+      64,
+      32
+    ],
+    "activation": "relu",
+    "output_activation": "linear",
+    "optimizer": "adam",
+    "loss": "mse",
+    "reconstruction_error": "mse",
+    "latent_dim": 8,
+    "learning_rate": 0.0036832964384234204,
+    "dropout_rate": 0.0176985004103839,
+    "l2_reg": 1.959828624191452e-05,
+    "batch_norm": true,
+    "input_dim": 115
+  },
+  "train_error_summary": {
+    "mean": 0.02103545516729355,
+    "std": 0.07251319289207458,
+    "min": 0.0011854426702484488,
+    "p50": 0.009875956922769547,
+    "p95": 0.05389552563428879,
+    "p99": 0.16150571405887604,
+    "p99_5": 0.29700398445129395,
+    "max": 4.713331699371338
+  },
+  "val_error_summary": {
+    "mean": 0.022698884829878807,
+    "std": 0.09605628252029419,
+    "min": 0.0017229515360668302,
+    "p50": 0.010022374801337719,
+    "p95": 0.056430134922266006,
+    "p99": 0.17565865814685822,
+    "p99_5": 0.3705414831638336,
+    "max": 8.469192504882812
+  }
+}

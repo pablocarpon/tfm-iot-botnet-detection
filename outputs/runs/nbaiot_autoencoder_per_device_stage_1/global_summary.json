@@ -1,0 +1,1978 @@
+{
+  "experiment_name": "nbaiot_autoencoder_per_device_stage_1",
+  "dataset": "nbaiot",
+  "strategy": "per_device_autoencoder_screening",
+  "seed": 42,
+  "stage": 1,
+  "n_devices": 9,
+  "n_model_configs": 5,
+  "n_trainings": 45,
+  "training": {
+    "epochs": 100,
+    "batch_size": 1024,
+    "shuffle_train": false,
+    "early_stopping": {
+      "enabled": true,
+      "monitor": "val_loss",
+      "mode": "min",
+      "patience": 10,
+      "min_delta": 1e-05,
+      "restore_best_weights": true
+    }
+  },
+  "devices": {
+    "device_1": {
+      "n_features": 115,
+      "configs": {
+        "model_1_base_mse": {
+          "model_name": "Base + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 76,
+          "best_epoch": 66,
+          "best_val_loss": 0.03457392007112503,
+          "train_error_summary": {
+            "mean": 0.028755586594343185,
+            "std": 0.24172520637512207,
+            "min": 0.0006263317773118615,
+            "p50": 0.003192257136106491,
+            "p95": 0.07123487442731857,
+            "p99": 0.3362387418746948,
+            "max": 11.809957504272461
+          },
+          "val_error_summary": {
+            "mean": 0.03457391634583473,
+            "std": 0.666125476360321,
+            "min": 0.0006669649737887084,
+            "p50": 0.00333011825568974,
+            "p95": 0.07563934475183487,
+            "p99": 0.3723694980144501,
+            "max": 62.84852600097656
+          }
+        },
+        "model_2_base_mae": {
+          "model_name": "Base + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 97,
+          "best_val_loss": 0.04751500114798546,
+          "train_error_summary": {
+            "mean": 0.04606516286730766,
+            "std": 0.16287533938884735,
+            "min": 0.00299566681496799,
+            "p50": 0.022288814187049866,
+            "p95": 0.11043225973844528,
+            "p99": 0.4193184971809387,
+            "max": 7.377169132232666
+          },
+          "val_error_summary": {
+            "mean": 0.04751500114798546,
+            "std": 0.18149951100349426,
+            "min": 0.002988658146932721,
+            "p50": 0.02240850031375885,
+            "p95": 0.11373337358236313,
+            "p99": 0.4523363411426544,
+            "max": 6.266864776611328
+          }
+        },
+        "model_3_compact_mse": {
+          "model_name": "Compacto + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 98,
+          "best_val_loss": 0.029406525194644928,
+          "train_error_summary": {
+            "mean": 0.0257850531488657,
+            "std": 0.2171320617198944,
+            "min": 0.0004001990891993046,
+            "p50": 0.002889078576117754,
+            "p95": 0.06328713148832321,
+            "p99": 0.31681403517723083,
+            "max": 13.285015106201172
+          },
+          "val_error_summary": {
+            "mean": 0.029406525194644928,
+            "std": 0.5316663980484009,
+            "min": 0.000425887992605567,
+            "p50": 0.0029645701870322227,
+            "p95": 0.07091710716485977,
+            "p99": 0.33752375841140747,
+            "max": 49.99736785888672
+          }
+        },
+        "model_4_compact_regularized_mse": {
+          "model_name": "Compacto regularizado + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 95,
+          "best_epoch": 85,
+          "best_val_loss": 0.12302906066179276,
+          "train_error_summary": {
+            "mean": 0.10582684725522995,
+            "std": 1.2118170261383057,
+            "min": 0.00044958412763662636,
+            "p50": 0.01380077749490738,
+            "p95": 0.22041413187980652,
+            "p99": 1.0571372509002686,
+            "max": 105.25305938720703
+          },
+          "val_error_summary": {
+            "mean": 0.10020101070404053,
+            "std": 1.021384835243225,
+            "min": 0.0005570265930145979,
+            "p50": 0.014152174815535545,
+            "p95": 0.22669509053230286,
+            "p99": 1.0799554586410522,
+            "max": 64.06883239746094
+          }
+        },
+        "model_5_compact_regularized_mae": {
+          "model_name": "Compacto regularizado + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 99,
+          "best_val_loss": 0.0815613865852356,
+          "train_error_summary": {
+            "mean": 0.07353951036930084,
+            "std": 0.3443726599216461,
+            "min": 0.0057538277469575405,
+            "p50": 0.030182652175426483,
+            "p95": 0.19254480302333832,
+            "p99": 0.504967212677002,
+            "max": 15.438117027282715
+          },
+          "val_error_summary": {
+            "mean": 0.07629718631505966,
+            "std": 0.4231583774089813,
+            "min": 0.0070777530781924725,
+            "p50": 0.030545946210622787,
+            "p95": 0.20533685386180878,
+            "p99": 0.5074309706687927,
+            "max": 15.438117027282715
+          }
+        }
+      }
+    },
+    "device_2": {
+      "n_features": 115,
+      "configs": {
+        "model_1_base_mse": {
+          "model_name": "Base + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 99,
+          "best_val_loss": 0.027706235647201538,
+          "train_error_summary": {
+            "mean": 0.028095707297325134,
+            "std": 0.07798489183187485,
+            "min": 0.00045562314335256815,
+            "p50": 0.009220664389431477,
+            "p95": 0.09717432409524918,
+            "p99": 0.3979763090610504,
+            "max": 1.6934213638305664
+          },
+          "val_error_summary": {
+            "mean": 0.027706237509846687,
+            "std": 0.09390999376773834,
+            "min": 0.0004565829294733703,
+            "p50": 0.008887555450201035,
+            "p95": 0.08955631405115128,
+            "p99": 0.3704468309879303,
+            "max": 2.5667755603790283
+          }
+        },
+        "model_2_base_mae": {
+          "model_name": "Base + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.08846673369407654,
+          "train_error_summary": {
+            "mean": 0.09177693724632263,
+            "std": 0.15101581811904907,
+            "min": 0.0051757823675870895,
+            "p50": 0.05758792906999588,
+            "p95": 0.27184954285621643,
+            "p99": 0.7008687853813171,
+            "max": 2.7304751873016357
+          },
+          "val_error_summary": {
+            "mean": 0.08846673369407654,
+            "std": 0.14318260550498962,
+            "min": 0.00520509947091341,
+            "p50": 0.05681473761796951,
+            "p95": 0.2616700828075409,
+            "p99": 0.497354656457901,
+            "max": 2.4036426544189453
+          }
+        },
+        "model_3_compact_mse": {
+          "model_name": "Compacto + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.03053315170109272,
+          "train_error_summary": {
+            "mean": 0.03202664852142334,
+            "std": 0.08814801275730133,
+            "min": 0.0005536457756534219,
+            "p50": 0.011561605148017406,
+            "p95": 0.11120152473449707,
+            "p99": 0.4151095747947693,
+            "max": 1.8353997468948364
+          },
+          "val_error_summary": {
+            "mean": 0.03053315170109272,
+            "std": 0.09213880449533463,
+            "min": 0.0005772446165792644,
+            "p50": 0.011235269717872143,
+            "p95": 0.09784141927957535,
+            "p99": 0.3879968523979187,
+            "max": 2.3275551795959473
+          }
+        },
+        "model_4_compact_regularized_mse": {
+          "model_name": "Compacto regularizado + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 99,
+          "best_val_loss": 0.10928116738796234,
+          "train_error_summary": {
+            "mean": 0.09694307297468185,
+            "std": 0.23674415051937103,
+            "min": 0.004334177356213331,
+            "p50": 0.03706283122301102,
+            "p95": 0.33337703347206116,
+            "p99": 1.1939252614974976,
+            "max": 4.351104259490967
+          },
+          "val_error_summary": {
+            "mean": 0.08958558738231659,
+            "std": 0.218553364276886,
+            "min": 0.004495048895478249,
+            "p50": 0.03526797145605087,
+            "p95": 0.31866031885147095,
+            "p99": 1.0130054950714111,
+            "max": 3.962076425552368
+          }
+        },
+        "model_5_compact_regularized_mae": {
+          "model_name": "Compacto regularizado + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.17819833755493164,
+          "train_error_summary": {
+            "mean": 0.1703496277332306,
+            "std": 0.1856415867805481,
+            "min": 0.041448626667261124,
+            "p50": 0.11294256150722504,
+            "p95": 0.42592310905456543,
+            "p99": 0.8723729252815247,
+            "max": 2.9700875282287598
+          },
+          "val_error_summary": {
+            "mean": 0.16472949087619781,
+            "std": 0.17140372097492218,
+            "min": 0.043412838131189346,
+            "p50": 0.10935360938310623,
+            "p95": 0.4103609025478363,
+            "p99": 0.7782137989997864,
+            "max": 2.559706211090088
+          }
+        }
+      }
+    },
+    "device_3": {
+      "n_features": 115,
+      "configs": {
+        "model_1_base_mse": {
+          "model_name": "Base + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 99,
+          "best_val_loss": 0.017755204811692238,
+          "train_error_summary": {
+            "mean": 0.015052391216158867,
+            "std": 0.052772242575883865,
+            "min": 0.0003912537940777838,
+            "p50": 0.00284888269379735,
+            "p95": 0.058692384511232376,
+            "p99": 0.19206883013248444,
+            "max": 2.15800404548645
+          },
+          "val_error_summary": {
+            "mean": 0.017755204811692238,
+            "std": 0.0866813212633133,
+            "min": 0.00037214349140413105,
+            "p50": 0.0029671082738786936,
+            "p95": 0.062365978956222534,
+            "p99": 0.2339969426393509,
+            "max": 3.629572868347168
+          }
+        },
+        "model_2_base_mae": {
+          "model_name": "Base + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.05493226274847984,
+          "train_error_summary": {
+            "mean": 0.053634241223335266,
+            "std": 0.14001862704753876,
+            "min": 0.0023552337661385536,
+            "p50": 0.021233893930912018,
+            "p95": 0.16190999746322632,
+            "p99": 0.6083614826202393,
+            "max": 4.823699474334717
+          },
+          "val_error_summary": {
+            "mean": 0.05493226647377014,
+            "std": 0.1458851397037506,
+            "min": 0.0023552514612674713,
+            "p50": 0.021509313955903053,
+            "p95": 0.17208141088485718,
+            "p99": 0.6095032691955566,
+            "max": 4.823699474334717
+          }
+        },
+        "model_3_compact_mse": {
+          "model_name": "Compacto + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.025797057896852493,
+          "train_error_summary": {
+            "mean": 0.022142143920063972,
+            "std": 0.08384068310260773,
+            "min": 0.0002976822725031525,
+            "p50": 0.004097034223377705,
+            "p95": 0.08477155864238739,
+            "p99": 0.2913096249103546,
+            "max": 4.0239739418029785
+          },
+          "val_error_summary": {
+            "mean": 0.025797056034207344,
+            "std": 0.12807424366474152,
+            "min": 0.0003219620557501912,
+            "p50": 0.004067153204232454,
+            "p95": 0.08664762228727341,
+            "p99": 0.32406386733055115,
+            "max": 4.092525959014893
+          }
+        },
+        "model_4_compact_regularized_mse": {
+          "model_name": "Compacto regularizado + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 98,
+          "best_val_loss": 0.10135574638843536,
+          "train_error_summary": {
+            "mean": 0.08017098158597946,
+            "std": 0.37589725852012634,
+            "min": 0.0020968106109648943,
+            "p50": 0.019017795100808144,
+            "p95": 0.2717837393283844,
+            "p99": 0.9558795094490051,
+            "max": 26.736114501953125
+          },
+          "val_error_summary": {
+            "mean": 0.08419594168663025,
+            "std": 0.4355946183204651,
+            "min": 0.0021237169858068228,
+            "p50": 0.019551996141672134,
+            "p95": 0.27726995944976807,
+            "p99": 1.0382964611053467,
+            "max": 28.407989501953125
+          }
+        },
+        "model_5_compact_regularized_mae": {
+          "model_name": "Compacto regularizado + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.09368717670440674,
+          "train_error_summary": {
+            "mean": 0.08614545315504074,
+            "std": 0.16920199990272522,
+            "min": 0.0041894810274243355,
+            "p50": 0.040675707161426544,
+            "p95": 0.30702683329582214,
+            "p99": 0.7885771989822388,
+            "max": 5.200038909912109
+          },
+          "val_error_summary": {
+            "mean": 0.08736627548933029,
+            "std": 0.17715254426002502,
+            "min": 0.004420454613864422,
+            "p50": 0.04060500115156174,
+            "p95": 0.31307917833328247,
+            "p99": 0.7885771989822388,
+            "max": 5.200038909912109
+          }
+        }
+      }
+    },
+    "device_4": {
+      "n_features": 115,
+      "configs": {
+        "model_1_base_mse": {
+          "model_name": "Base + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.007734077982604504,
+          "train_error_summary": {
+            "mean": 0.007579597178846598,
+            "std": 0.03724880889058113,
+            "min": 0.00015675333270337433,
+            "p50": 0.0009574166033416986,
+            "p95": 0.026926152408123016,
+            "p99": 0.15842990577220917,
+            "max": 3.686121940612793
+          },
+          "val_error_summary": {
+            "mean": 0.007734077982604504,
+            "std": 0.038811199367046356,
+            "min": 0.00016715477977413684,
+            "p50": 0.0009560241596773267,
+            "p95": 0.02566027082502842,
+            "p99": 0.1605730801820755,
+            "max": 1.7140384912490845
+          }
+        },
+        "model_2_base_mae": {
+          "model_name": "Base + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.03335883468389511,
+          "train_error_summary": {
+            "mean": 0.03402695804834366,
+            "std": 0.09715678542852402,
+            "min": 0.0021599000319838524,
+            "p50": 0.012106968089938164,
+            "p95": 0.12506750226020813,
+            "p99": 0.3907095193862915,
+            "max": 3.04170823097229
+          },
+          "val_error_summary": {
+            "mean": 0.03335883095860481,
+            "std": 0.09078333526849747,
+            "min": 0.0019934275187551975,
+            "p50": 0.01216562744230032,
+            "p95": 0.12625446915626526,
+            "p99": 0.38306403160095215,
+            "max": 2.77189302444458
+          }
+        },
+        "model_3_compact_mse": {
+          "model_name": "Compacto + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 99,
+          "best_val_loss": 0.013588834553956985,
+          "train_error_summary": {
+            "mean": 0.01381500530987978,
+            "std": 0.07550758868455887,
+            "min": 0.0002649743400979787,
+            "p50": 0.0015940967714414,
+            "p95": 0.04962056875228882,
+            "p99": 0.28768694400787354,
+            "max": 11.242026329040527
+          },
+          "val_error_summary": {
+            "mean": 0.01358883548527956,
+            "std": 0.06465543806552887,
+            "min": 0.00028898086748085916,
+            "p50": 0.0015864702872931957,
+            "p95": 0.04803445562720299,
+            "p99": 0.2836533784866333,
+            "max": 1.9634696245193481
+          }
+        },
+        "model_4_compact_regularized_mse": {
+          "model_name": "Compacto regularizado + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.06726326793432236,
+          "train_error_summary": {
+            "mean": 0.05597668141126633,
+            "std": 0.2538326382637024,
+            "min": 0.0006822116556577384,
+            "p50": 0.007668929174542427,
+            "p95": 0.19763046503067017,
+            "p99": 1.0473520755767822,
+            "max": 23.681814193725586
+          },
+          "val_error_summary": {
+            "mean": 0.05393366143107414,
+            "std": 0.23963694274425507,
+            "min": 0.0005700414185412228,
+            "p50": 0.007656370289623737,
+            "p95": 0.19107556343078613,
+            "p99": 1.004637598991394,
+            "max": 15.65487003326416
+          }
+        },
+        "model_5_compact_regularized_mae": {
+          "model_name": "Compacto regularizado + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 70,
+          "best_epoch": 60,
+          "best_val_loss": 0.06810168921947479,
+          "train_error_summary": {
+            "mean": 0.06564012914896011,
+            "std": 0.17033609747886658,
+            "min": 0.003511169459670782,
+            "p50": 0.023324422538280487,
+            "p95": 0.24607516825199127,
+            "p99": 0.8988460898399353,
+            "max": 3.477149486541748
+          },
+          "val_error_summary": {
+            "mean": 0.0638851523399353,
+            "std": 0.16293124854564667,
+            "min": 0.0036389201413840055,
+            "p50": 0.023316126316785812,
+            "p95": 0.24009302258491516,
+            "p99": 0.829387366771698,
+            "max": 2.740408420562744
+          }
+        }
+      }
+    },
+    "device_5": {
+      "n_features": 115,
+      "configs": {
+        "model_1_base_mse": {
+          "model_name": "Base + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 95,
+          "best_val_loss": 0.0046793632209300995,
+          "train_error_summary": {
+            "mean": 0.004621910862624645,
+            "std": 0.015266192145645618,
+            "min": 9.71060580923222e-05,
+            "p50": 0.0017096741357818246,
+            "p95": 0.0144849494099617,
+            "p99": 0.05587392300367355,
+            "max": 0.5699784755706787
+          },
+          "val_error_summary": {
+            "mean": 0.0046793632209300995,
+            "std": 0.01753832958638668,
+            "min": 0.00010778515570564196,
+            "p50": 0.0017008375143632293,
+            "p95": 0.014411600306630135,
+            "p99": 0.05697569251060486,
+            "max": 0.8905504941940308
+          }
+        },
+        "model_2_base_mae": {
+          "model_name": "Base + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 98,
+          "best_val_loss": 0.04150331765413284,
+          "train_error_summary": {
+            "mean": 0.04307893291115761,
+            "std": 0.08483278006315231,
+            "min": 0.0032761532347649336,
+            "p50": 0.029339630156755447,
+            "p95": 0.11197313666343689,
+            "p99": 0.28689345717430115,
+            "max": 3.4668853282928467
+          },
+          "val_error_summary": {
+            "mean": 0.04150331765413284,
+            "std": 0.0764835923910141,
+            "min": 0.002999101998284459,
+            "p50": 0.029252832755446434,
+            "p95": 0.10763837397098541,
+            "p99": 0.25754740834236145,
+            "max": 3.4668853282928467
+          }
+        },
+        "model_3_compact_mse": {
+          "model_name": "Compacto + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.006323916371911764,
+          "train_error_summary": {
+            "mean": 0.006479170173406601,
+            "std": 0.024359513074159622,
+            "min": 0.00011457662913016975,
+            "p50": 0.0023514586500823498,
+            "p95": 0.019945736974477768,
+            "p99": 0.07634006440639496,
+            "max": 1.0911129713058472
+          },
+          "val_error_summary": {
+            "mean": 0.0063239154405891895,
+            "std": 0.02237984724342823,
+            "min": 0.0001245926396222785,
+            "p50": 0.0023526924196630716,
+            "p95": 0.019984088838100433,
+            "p99": 0.07393386960029602,
+            "max": 0.8868948221206665
+          }
+        },
+        "model_4_compact_regularized_mse": {
+          "model_name": "Compacto regularizado + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 90,
+          "best_val_loss": 0.04169837757945061,
+          "train_error_summary": {
+            "mean": 0.03285715728998184,
+            "std": 0.16734153032302856,
+            "min": 0.0004201541014481336,
+            "p50": 0.011404139921069145,
+            "p95": 0.11531753838062286,
+            "p99": 0.3270208239555359,
+            "max": 17.456172943115234
+          },
+          "val_error_summary": {
+            "mean": 0.031795576214790344,
+            "std": 0.1791118085384369,
+            "min": 0.0005043302662670612,
+            "p50": 0.011084971949458122,
+            "p95": 0.11348500847816467,
+            "p99": 0.30802121758461,
+            "max": 17.456172943115234
+          }
+        },
+        "model_5_compact_regularized_mae": {
+          "model_name": "Compacto regularizado + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.07671178132295609,
+          "train_error_summary": {
+            "mean": 0.0726596862077713,
+            "std": 0.11993607133626938,
+            "min": 0.003995729610323906,
+            "p50": 0.03874744474887848,
+            "p95": 0.2121748924255371,
+            "p99": 0.42532697319984436,
+            "max": 4.899503231048584
+          },
+          "val_error_summary": {
+            "mean": 0.07049261033535004,
+            "std": 0.11030787974596024,
+            "min": 0.003201399464160204,
+            "p50": 0.038419242948293686,
+            "p95": 0.20917615294456482,
+            "p99": 0.4015795588493347,
+            "max": 4.899503231048584
+          }
+        }
+      }
+    },
+    "device_6": {
+      "n_features": 115,
+      "configs": {
+        "model_1_base_mse": {
+          "model_name": "Base + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 99,
+          "best_val_loss": 0.008362497203052044,
+          "train_error_summary": {
+            "mean": 0.007237778976559639,
+            "std": 0.022057190537452698,
+            "min": 0.00034305950975976884,
+            "p50": 0.003336386987939477,
+            "p95": 0.02161840721964836,
+            "p99": 0.06652840971946716,
+            "max": 1.2454334497451782
+          },
+          "val_error_summary": {
+            "mean": 0.008362498134374619,
+            "std": 0.05432756245136261,
+            "min": 0.00036803423427045345,
+            "p50": 0.0033918374683707952,
+            "p95": 0.02317148447036743,
+            "p99": 0.07981573045253754,
+            "max": 6.343019485473633
+          }
+        },
+        "model_2_base_mae": {
+          "model_name": "Base + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 98,
+          "best_val_loss": 0.04980131611227989,
+          "train_error_summary": {
+            "mean": 0.04874444752931595,
+            "std": 0.07894310355186462,
+            "min": 0.00510408217087388,
+            "p50": 0.03672711178660393,
+            "p95": 0.10687477141618729,
+            "p99": 0.19740766286849976,
+            "max": 2.8231899738311768
+          },
+          "val_error_summary": {
+            "mean": 0.04980131611227989,
+            "std": 0.08029673248529434,
+            "min": 0.005586680024862289,
+            "p50": 0.03709014505147934,
+            "p95": 0.10894902050495148,
+            "p99": 0.222190722823143,
+            "max": 2.8231899738311768
+          }
+        },
+        "model_3_compact_mse": {
+          "model_name": "Compacto + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.009491462260484695,
+          "train_error_summary": {
+            "mean": 0.008535373024642467,
+            "std": 0.030385997146368027,
+            "min": 0.0005052276537753642,
+            "p50": 0.0035734842531383038,
+            "p95": 0.024451203644275665,
+            "p99": 0.08341976255178452,
+            "max": 1.7072843313217163
+          },
+          "val_error_summary": {
+            "mean": 0.009491462260484695,
+            "std": 0.047673534601926804,
+            "min": 0.0005641981260851026,
+            "p50": 0.0036193099804222584,
+            "p95": 0.025807591155171394,
+            "p99": 0.09590591490268707,
+            "max": 4.253804683685303
+          }
+        },
+        "model_4_compact_regularized_mse": {
+          "model_name": "Compacto regularizado + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 66,
+          "best_epoch": 56,
+          "best_val_loss": 0.06077471002936363,
+          "train_error_summary": {
+            "mean": 0.0464344397187233,
+            "std": 0.19993853569030762,
+            "min": 0.002106783678755164,
+            "p50": 0.023900296539068222,
+            "p95": 0.11665161699056625,
+            "p99": 0.3312027156352997,
+            "max": 12.451642990112305
+          },
+          "val_error_summary": {
+            "mean": 0.049405787140131,
+            "std": 0.22929130494594574,
+            "min": 0.0020388017874211073,
+            "p50": 0.024399084970355034,
+            "p95": 0.12227763235569,
+            "p99": 0.37320956587791443,
+            "max": 12.451642990112305
+          }
+        },
+        "model_5_compact_regularized_mae": {
+          "model_name": "Compacto regularizado + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 93,
+          "best_epoch": 83,
+          "best_val_loss": 0.09179369360208511,
+          "train_error_summary": {
+            "mean": 0.08318588137626648,
+            "std": 0.10644309222698212,
+            "min": 0.00866183266043663,
+            "p50": 0.05854341387748718,
+            "p95": 0.19918093085289001,
+            "p99": 0.31163954734802246,
+            "max": 5.196266174316406
+          },
+          "val_error_summary": {
+            "mean": 0.08517955243587494,
+            "std": 0.10997805744409561,
+            "min": 0.00916890986263752,
+            "p50": 0.059208836406469345,
+            "p95": 0.20477788150310516,
+            "p99": 0.3298540711402893,
+            "max": 3.8069040775299072
+          }
+        }
+      }
+    },
+    "device_7": {
+      "n_features": 115,
+      "configs": {
+        "model_1_base_mse": {
+          "model_name": "Base + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.02013310045003891,
+          "train_error_summary": {
+            "mean": 0.016240831464529037,
+            "std": 0.0727824941277504,
+            "min": 0.00036049913614988327,
+            "p50": 0.0019629490561783314,
+            "p95": 0.06512358784675598,
+            "p99": 0.34591144323349,
+            "max": 1.8155498504638672
+          },
+          "val_error_summary": {
+            "mean": 0.02013310045003891,
+            "std": 0.10909857600927353,
+            "min": 0.0004048562841489911,
+            "p50": 0.0019642957486212254,
+            "p95": 0.07658170908689499,
+            "p99": 0.4122123718261719,
+            "max": 5.259700298309326
+          }
+        },
+        "model_2_base_mae": {
+          "model_name": "Base + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 99,
+          "best_val_loss": 0.06312716752290726,
+          "train_error_summary": {
+            "mean": 0.059868812561035156,
+            "std": 0.1665634661912918,
+            "min": 0.003056138753890991,
+            "p50": 0.01564793288707733,
+            "p95": 0.22425657510757446,
+            "p99": 0.9700202345848083,
+            "max": 3.2147879600524902
+          },
+          "val_error_summary": {
+            "mean": 0.06312717497348785,
+            "std": 0.1800079047679901,
+            "min": 0.0031715985387563705,
+            "p50": 0.01579095982015133,
+            "p95": 0.22360308468341827,
+            "p99": 1.0401676893234253,
+            "max": 3.1549630165100098
+          }
+        },
+        "model_3_compact_mse": {
+          "model_name": "Compacto + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.029912428930401802,
+          "train_error_summary": {
+            "mean": 0.02649465762078762,
+            "std": 0.12467440962791443,
+            "min": 0.00038706560735590756,
+            "p50": 0.0025976928882300854,
+            "p95": 0.09899738430976868,
+            "p99": 0.5591299533843994,
+            "max": 3.44246244430542
+          },
+          "val_error_summary": {
+            "mean": 0.029912428930401802,
+            "std": 0.1487220674753189,
+            "min": 0.0003878912830259651,
+            "p50": 0.0026328726671636105,
+            "p95": 0.11059906333684921,
+            "p99": 0.6481741070747375,
+            "max": 4.767794609069824
+          }
+        },
+        "model_4_compact_regularized_mse": {
+          "model_name": "Compacto regularizado + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 95,
+          "best_val_loss": 0.10288885235786438,
+          "train_error_summary": {
+            "mean": 0.08001171797513962,
+            "std": 0.3868405520915985,
+            "min": 0.0014695983845740557,
+            "p50": 0.008192615583539009,
+            "p95": 0.2875261604785919,
+            "p99": 1.736207127571106,
+            "max": 11.765416145324707
+          },
+          "val_error_summary": {
+            "mean": 0.08554248511791229,
+            "std": 0.4141702950000763,
+            "min": 0.0014712447300553322,
+            "p50": 0.00835486687719822,
+            "p95": 0.3128029704093933,
+            "p99": 1.8226197957992554,
+            "max": 10.739633560180664
+          }
+        },
+        "model_5_compact_regularized_mae": {
+          "model_name": "Compacto regularizado + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 93,
+          "best_epoch": 89,
+          "best_val_loss": 0.09860511869192123,
+          "train_error_summary": {
+            "mean": 0.08774005621671677,
+            "std": 0.2218392938375473,
+            "min": 0.007979225367307663,
+            "p50": 0.033814266324043274,
+            "p95": 0.2840708792209625,
+            "p99": 1.3823835849761963,
+            "max": 4.404875755310059
+          },
+          "val_error_summary": {
+            "mean": 0.09199312329292297,
+            "std": 0.23897743225097656,
+            "min": 0.007188644725829363,
+            "p50": 0.03408383950591087,
+            "p95": 0.3081839382648468,
+            "p99": 1.4031286239624023,
+            "max": 4.404875755310059
+          }
+        }
+      }
+    },
+    "device_8": {
+      "n_features": 115,
+      "configs": {
+        "model_1_base_mse": {
+          "model_name": "Base + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 98,
+          "best_val_loss": 0.013774756342172623,
+          "train_error_summary": {
+            "mean": 0.00932522676885128,
+            "std": 0.0626177191734314,
+            "min": 0.00015702586097177118,
+            "p50": 0.0011831180891022086,
+            "p95": 0.035423316061496735,
+            "p99": 0.13619720935821533,
+            "max": 6.1099395751953125
+          },
+          "val_error_summary": {
+            "mean": 0.013774757273495197,
+            "std": 0.2905564308166504,
+            "min": 0.00018271963926963508,
+            "p50": 0.0011506180744618177,
+            "p95": 0.033407602459192276,
+            "p99": 0.15028412640094757,
+            "max": 25.789104461669922
+          }
+        },
+        "model_2_base_mae": {
+          "model_name": "Base + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.06051350384950638,
+          "train_error_summary": {
+            "mean": 0.060084711760282516,
+            "std": 0.11302227526903152,
+            "min": 0.002301248023286462,
+            "p50": 0.02802170440554619,
+            "p95": 0.22914451360702515,
+            "p99": 0.464189350605011,
+            "max": 4.220365524291992
+          },
+          "val_error_summary": {
+            "mean": 0.06051350384950638,
+            "std": 0.1354626715183258,
+            "min": 0.0023702289909124374,
+            "p50": 0.027798356488347054,
+            "p95": 0.2265326827764511,
+            "p99": 0.44745415449142456,
+            "max": 4.288891315460205
+          }
+        },
+        "model_3_compact_mse": {
+          "model_name": "Compacto + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.016688453033566475,
+          "train_error_summary": {
+            "mean": 0.012154211290180683,
+            "std": 0.06286866962909698,
+            "min": 0.00013657620002049953,
+            "p50": 0.00179157848469913,
+            "p95": 0.04529200494289398,
+            "p99": 0.1877952516078949,
+            "max": 4.2419114112854
+          },
+          "val_error_summary": {
+            "mean": 0.016688453033566475,
+            "std": 0.2372414767742157,
+            "min": 0.00014257292787078768,
+            "p50": 0.0017583651933819056,
+            "p95": 0.04332567751407623,
+            "p99": 0.21486353874206543,
+            "max": 15.407843589782715
+          }
+        },
+        "model_4_compact_regularized_mse": {
+          "model_name": "Compacto regularizado + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 74,
+          "best_epoch": 64,
+          "best_val_loss": 0.0959814190864563,
+          "train_error_summary": {
+            "mean": 0.08244876563549042,
+            "std": 0.9565666317939758,
+            "min": 0.0008247588411904871,
+            "p50": 0.013330759480595589,
+            "p95": 0.3139136731624603,
+            "p99": 1.0705854892730713,
+            "max": 115.73385620117188
+          },
+          "val_error_summary": {
+            "mean": 0.07878018915653229,
+            "std": 0.5200061202049255,
+            "min": 0.0008535960805602372,
+            "p50": 0.013004856184124947,
+            "p95": 0.29876455664634705,
+            "p99": 1.0973566770553589,
+            "max": 27.597137451171875
+          }
+        },
+        "model_5_compact_regularized_mae": {
+          "model_name": "Compacto regularizado + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.08482713997364044,
+          "train_error_summary": {
+            "mean": 0.07948169112205505,
+            "std": 0.15021654963493347,
+            "min": 0.010215993970632553,
+            "p50": 0.029313387349247932,
+            "p95": 0.29128891229629517,
+            "p99": 0.7942092418670654,
+            "max": 4.845437049865723
+          },
+          "val_error_summary": {
+            "mean": 0.07888077944517136,
+            "std": 0.1676516979932785,
+            "min": 0.011273803189396858,
+            "p50": 0.02896588109433651,
+            "p95": 0.27664798498153687,
+            "p99": 0.7940056920051575,
+            "max": 4.519440650939941
+          }
+        }
+      }
+    },
+    "device_9": {
+      "n_features": 115,
+      "configs": {
+        "model_1_base_mse": {
+          "model_name": "Base + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 98,
+          "best_val_loss": 0.03089655190706253,
+          "train_error_summary": {
+            "mean": 0.018194852396845818,
+            "std": 0.08584456890821457,
+            "min": 0.00010626993753248826,
+            "p50": 0.000631173315923661,
+            "p95": 0.08974968641996384,
+            "p99": 0.3554183840751648,
+            "max": 2.2556777000427246
+          },
+          "val_error_summary": {
+            "mean": 0.03089655376970768,
+            "std": 0.23257824778556824,
+            "min": 0.00011362215445842594,
+            "p50": 0.0006401512073352933,
+            "p95": 0.10276810824871063,
+            "p99": 0.6003687381744385,
+            "max": 6.9034905433654785
+          }
+        },
+        "model_2_base_mae": {
+          "model_name": "Base + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              86,
+              57,
+              38
+            ],
+            "latent_dim": 28,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 99,
+          "best_val_loss": 0.06815076619386673,
+          "train_error_summary": {
+            "mean": 0.0627719983458519,
+            "std": 0.15949997305870056,
+            "min": 0.002533351769670844,
+            "p50": 0.0130983367562294,
+            "p95": 0.30031293630599976,
+            "p99": 0.8887667655944824,
+            "max": 2.744328022003174
+          },
+          "val_error_summary": {
+            "mean": 0.06815076619386673,
+            "std": 0.17715395987033844,
+            "min": 0.002733040601015091,
+            "p50": 0.013389711268246174,
+            "p95": 0.3174020051956177,
+            "p99": 0.9357096552848816,
+            "max": 2.0046114921569824
+          }
+        },
+        "model_3_compact_mse": {
+          "model_name": "Compacto + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.0,
+            "batch_norm": false,
+            "l2_reg": 0.0,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 100,
+          "best_val_loss": 0.04119724780321121,
+          "train_error_summary": {
+            "mean": 0.02658672071993351,
+            "std": 0.12485270947217941,
+            "min": 0.00017347154789604247,
+            "p50": 0.0008831039303913713,
+            "p95": 0.13027022778987885,
+            "p99": 0.5091823935508728,
+            "max": 3.566758632659912
+          },
+          "val_error_summary": {
+            "mean": 0.04119725152850151,
+            "std": 0.28567442297935486,
+            "min": 0.00017421005759388208,
+            "p50": 0.0008778509218245745,
+            "p95": 0.1542852371931076,
+            "p99": 0.7331672310829163,
+            "max": 8.293036460876465
+          }
+        },
+        "model_4_compact_regularized_mse": {
+          "model_name": "Compacto regularizado + MSE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "reconstruction_error": "mse"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 91,
+          "best_val_loss": 0.13368314504623413,
+          "train_error_summary": {
+            "mean": 0.09443140029907227,
+            "std": 0.4650590121746063,
+            "min": 0.0010460726916790009,
+            "p50": 0.0043833195231854916,
+            "p95": 0.4821344316005707,
+            "p99": 1.8547003269195557,
+            "max": 28.03884506225586
+          },
+          "val_error_summary": {
+            "mean": 0.11260680854320526,
+            "std": 0.5580321550369263,
+            "min": 0.0011900013778358698,
+            "p50": 0.004401697777211666,
+            "p95": 0.5145232677459717,
+            "p99": 2.146275281906128,
+            "max": 12.591184616088867
+          }
+        },
+        "model_5_compact_regularized_mae": {
+          "model_name": "Compacto regularizado + MAE",
+          "model_config": {
+            "type": "autoencoder",
+            "input_dim": 115,
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "latent_dim": 16,
+            "activation": "leaky_relu",
+            "output_activation": "linear",
+            "dropout_rate": 0.1,
+            "batch_norm": true,
+            "l2_reg": 0.0001,
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "loss": "mae",
+            "reconstruction_error": "mae"
+          },
+          "epochs_trained": 100,
+          "best_epoch": 99,
+          "best_val_loss": 0.1103934571146965,
+          "train_error_summary": {
+            "mean": 0.09667713195085526,
+            "std": 0.23055830597877502,
+            "min": 0.011419368907809258,
+            "p50": 0.03236805647611618,
+            "p95": 0.5135002732276917,
+            "p99": 1.1952449083328247,
+            "max": 3.5626261234283447
+          },
+          "val_error_summary": {
+            "mean": 0.10064344108104706,
+            "std": 0.2333563268184662,
+            "min": 0.011433827690780163,
+            "p50": 0.032624006271362305,
+            "p95": 0.5088576078414917,
+            "p99": 1.2974302768707275,
+            "max": 2.267582416534424
+          }
+        }
+      }
+    }
+  }
+}

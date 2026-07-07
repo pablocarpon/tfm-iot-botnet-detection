@@ -1,0 +1,449 @@
+{
+  "experiment_name": "nbaiot_autoencoder_per_device_stage_2",
+  "dataset": "nbaiot",
+  "model": "autoencoder",
+  "strategy": "per_device_autoencoder_optimization",
+  "seed": 42,
+  "stage": 2,
+  "n_devices": 9,
+  "n_trials_per_device": 10,
+  "objective": "minimize_p99_validation_reconstruction_error",
+  "training": {
+    "epochs": 100,
+    "batch_size": 1024,
+    "shuffle_train": true,
+    "early_stopping": {
+      "enabled": true,
+      "monitor": "val_loss",
+      "mode": "min",
+      "patience": 10,
+      "min_delta": 1e-05,
+      "restore_best_weights": true
+    }
+  },
+  "devices": {
+    "device_1": {
+      "n_features": 115,
+      "n_trials": 10,
+      "best_objective_value": 0.6971396803855896,
+      "final_model_validation_objective": 0.7588342428207397,
+      "objective_quantile": 0.99,
+      "best_epoch": 64,
+      "best_val_loss": 0.07145825773477554,
+      "best_params": {
+        "type": "autoencoder",
+        "hidden_dims": [
+          64,
+          32
+        ],
+        "activation": "relu",
+        "output_activation": "linear",
+        "optimizer": "adam",
+        "loss": "mse",
+        "reconstruction_error": "mse",
+        "latent_dim": 8,
+        "learning_rate": 0.0021576967455896826,
+        "dropout_rate": 0.03993475643167195,
+        "l2_reg": 5.1423443841361164e-05,
+        "batch_norm": false,
+        "input_dim": 115
+      },
+      "train_error_summary": {
+        "mean": 0.05935712903738022,
+        "std": 0.5658424496650696,
+        "min": 0.00042907739407382905,
+        "p50": 0.007934908382594585,
+        "p95": 0.11778751760721207,
+        "p99": 0.7088829278945923,
+        "p99_5": 1.8439009189605713,
+        "max": 31.25020980834961
+      },
+      "val_error_summary": {
+        "mean": 0.057658858597278595,
+        "std": 0.6074907183647156,
+        "min": 0.0004315057012718171,
+        "p50": 0.008152954280376434,
+        "p95": 0.12933942675590515,
+        "p99": 0.7588342428207397,
+        "p99_5": 1.4019525051116943,
+        "max": 41.341426849365234
+      }
+    },
+    "device_2": {
+      "n_features": 115,
+      "n_trials": 10,
+      "best_objective_value": 0.5246922969818115,
+      "final_model_validation_objective": 0.591450035572052,
+      "objective_quantile": 0.99,
+      "best_epoch": 77,
+      "best_val_loss": 0.05478397384285927,
+      "best_params": {
+        "type": "autoencoder",
+        "hidden_dims": [
+          64,
+          32
+        ],
+        "activation": "relu",
+        "output_activation": "linear",
+        "optimizer": "adam",
+        "loss": "mse",
+        "reconstruction_error": "mse",
+        "latent_dim": 8,
+        "learning_rate": 0.0036832964384234204,
+        "dropout_rate": 0.0176985004103839,
+        "l2_reg": 1.959828624191452e-05,
+        "batch_norm": true,
+        "input_dim": 115
+      },
+      "train_error_summary": {
+        "mean": 0.05261773616075516,
+        "std": 0.13346941769123077,
+        "min": 0.0031135466415435076,
+        "p50": 0.021650658920407295,
+        "p95": 0.1675928384065628,
+        "p99": 0.6286314129829407,
+        "p99_5": 0.9280807375907898,
+        "max": 3.080207109451294
+      },
+      "val_error_summary": {
+        "mean": 0.04906657710671425,
+        "std": 0.1257067620754242,
+        "min": 0.00421243067830801,
+        "p50": 0.021479981020092964,
+        "p95": 0.1528729647397995,
+        "p99": 0.591450035572052,
+        "p99_5": 0.8503660559654236,
+        "max": 2.9382028579711914
+      }
+    },
+    "device_3": {
+      "n_features": 115,
+      "n_trials": 10,
+      "best_objective_value": 0.5013381242752075,
+      "final_model_validation_objective": 0.8101675510406494,
+      "objective_quantile": 0.99,
+      "best_epoch": 52,
+      "best_val_loss": 0.06145340949296951,
+      "best_params": {
+        "type": "autoencoder",
+        "hidden_dims": [
+          64,
+          32
+        ],
+        "activation": "relu",
+        "output_activation": "linear",
+        "optimizer": "adam",
+        "loss": "mse",
+        "reconstruction_error": "mse",
+        "latent_dim": 8,
+        "learning_rate": 0.0036832964384234204,
+        "dropout_rate": 0.0176985004103839,
+        "l2_reg": 1.959828624191452e-05,
+        "batch_norm": true,
+        "input_dim": 115
+      },
+      "train_error_summary": {
+        "mean": 0.05138690769672394,
+        "std": 0.34389811754226685,
+        "min": 0.001117055187933147,
+        "p50": 0.00961579941213131,
+        "p95": 0.15220807492733002,
+        "p99": 0.6240354776382446,
+        "p99_5": 1.2967896461486816,
+        "max": 27.692792892456055
+      },
+      "val_error_summary": {
+        "mean": 0.05473652854561806,
+        "std": 0.3167824447154999,
+        "min": 0.0010910535929724574,
+        "p50": 0.009645888581871986,
+        "p95": 0.15358072519302368,
+        "p99": 0.8101675510406494,
+        "p99_5": 1.6819672584533691,
+        "max": 15.161527633666992
+      }
+    },
+    "device_4": {
+      "n_features": 115,
+      "n_trials": 10,
+      "best_objective_value": 0.6305568218231201,
+      "final_model_validation_objective": 0.6234242916107178,
+      "objective_quantile": 0.99,
+      "best_epoch": 78,
+      "best_val_loss": 0.04674745723605156,
+      "best_params": {
+        "type": "autoencoder",
+        "hidden_dims": [
+          64,
+          32
+        ],
+        "activation": "relu",
+        "output_activation": "linear",
+        "optimizer": "adam",
+        "loss": "mse",
+        "reconstruction_error": "mse",
+        "latent_dim": 16,
+        "learning_rate": 0.0008356499023325525,
+        "dropout_rate": 0.02818484499495253,
+        "l2_reg": 8.021969807540397e-05,
+        "batch_norm": true,
+        "input_dim": 115
+      },
+      "train_error_summary": {
+        "mean": 0.035792961716651917,
+        "std": 0.16583995521068573,
+        "min": 0.0005959434201940894,
+        "p50": 0.00555763766169548,
+        "p95": 0.1336045116186142,
+        "p99": 0.6493549942970276,
+        "p99_5": 0.972487211227417,
+        "max": 18.420196533203125
+      },
+      "val_error_summary": {
+        "mean": 0.03461097180843353,
+        "std": 0.14731861650943756,
+        "min": 0.0006830781931057572,
+        "p50": 0.005550517234951258,
+        "p95": 0.12882597744464874,
+        "p99": 0.6234242916107178,
+        "p99_5": 0.929133951663971,
+        "max": 7.377316474914551
+      }
+    },
+    "device_5": {
+      "n_features": 115,
+      "n_trials": 10,
+      "best_objective_value": 0.18519853055477142,
+      "final_model_validation_objective": 0.2667563855648041,
+      "objective_quantile": 0.99,
+      "best_epoch": 36,
+      "best_val_loss": 0.02693117968738079,
+      "best_params": {
+        "type": "autoencoder",
+        "hidden_dims": [
+          64,
+          32
+        ],
+        "activation": "relu",
+        "output_activation": "linear",
+        "optimizer": "adam",
+        "loss": "mse",
+        "reconstruction_error": "mse",
+        "latent_dim": 8,
+        "learning_rate": 0.0036832964384234204,
+        "dropout_rate": 0.0176985004103839,
+        "l2_reg": 1.959828624191452e-05,
+        "batch_norm": true,
+        "input_dim": 115
+      },
+      "train_error_summary": {
+        "mean": 0.02265605702996254,
+        "std": 0.0874972939491272,
+        "min": 0.0010371138341724873,
+        "p50": 0.007568053901195526,
+        "p95": 0.0723380446434021,
+        "p99": 0.2716362774372101,
+        "p99_5": 0.4225776195526123,
+        "max": 6.7794671058654785
+      },
+      "val_error_summary": {
+        "mean": 0.022115221247076988,
+        "std": 0.08783788979053497,
+        "min": 0.001127920695580542,
+        "p50": 0.007525690831243992,
+        "p95": 0.07223902642726898,
+        "p99": 0.2667563855648041,
+        "p99_5": 0.4092104434967041,
+        "max": 6.7794671058654785
+      }
+    },
+    "device_6": {
+      "n_features": 115,
+      "n_trials": 10,
+      "best_objective_value": 0.17812542617321014,
+      "final_model_validation_objective": 0.17565865814685822,
+      "objective_quantile": 0.99,
+      "best_epoch": 80,
+      "best_val_loss": 0.028101995587348938,
+      "best_params": {
+        "type": "autoencoder",
+        "hidden_dims": [
+          64,
+          32
+        ],
+        "activation": "relu",
+        "output_activation": "linear",
+        "optimizer": "adam",
+        "loss": "mse",
+        "reconstruction_error": "mse",
+        "latent_dim": 8,
+        "learning_rate": 0.0036832964384234204,
+        "dropout_rate": 0.0176985004103839,
+        "l2_reg": 1.959828624191452e-05,
+        "batch_norm": true,
+        "input_dim": 115
+      },
+      "train_error_summary": {
+        "mean": 0.02103545516729355,
+        "std": 0.07251319289207458,
+        "min": 0.0011854426702484488,
+        "p50": 0.009875956922769547,
+        "p95": 0.05389552563428879,
+        "p99": 0.16150571405887604,
+        "p99_5": 0.29700398445129395,
+        "max": 4.713331699371338
+      },
+      "val_error_summary": {
+        "mean": 0.022698884829878807,
+        "std": 0.09605628252029419,
+        "min": 0.0017229515360668302,
+        "p50": 0.010022374801337719,
+        "p95": 0.056430134922266006,
+        "p99": 0.17565865814685822,
+        "p99_5": 0.3705414831638336,
+        "max": 8.469192504882812
+      }
+    },
+    "device_7": {
+      "n_features": 115,
+      "n_trials": 10,
+      "best_objective_value": 0.9710317254066467,
+      "final_model_validation_objective": 1.1104776859283447,
+      "objective_quantile": 0.99,
+      "best_epoch": 67,
+      "best_val_loss": 0.05780436098575592,
+      "best_params": {
+        "type": "autoencoder",
+        "hidden_dims": [
+          64,
+          32
+        ],
+        "activation": "relu",
+        "output_activation": "linear",
+        "optimizer": "adam",
+        "loss": "mse",
+        "reconstruction_error": "mse",
+        "latent_dim": 8,
+        "learning_rate": 0.0036832964384234204,
+        "dropout_rate": 0.0176985004103839,
+        "l2_reg": 1.959828624191452e-05,
+        "batch_norm": true,
+        "input_dim": 115
+      },
+      "train_error_summary": {
+        "mean": 0.045688942074775696,
+        "std": 0.22474288940429688,
+        "min": 0.0007001273916102946,
+        "p50": 0.00434177927672863,
+        "p95": 0.17591792345046997,
+        "p99": 1.0013173818588257,
+        "p99_5": 1.4939534664154053,
+        "max": 7.833874702453613
+      },
+      "val_error_summary": {
+        "mean": 0.050160545855760574,
+        "std": 0.2557187080383301,
+        "min": 0.0008488773019053042,
+        "p50": 0.004410130903124809,
+        "p95": 0.19387246668338776,
+        "p99": 1.1104776859283447,
+        "p99_5": 1.5537183284759521,
+        "max": 6.5521559715271
+      }
+    },
+    "device_8": {
+      "n_features": 115,
+      "n_trials": 10,
+      "best_objective_value": 0.4120646119117737,
+      "final_model_validation_objective": 0.35521483421325684,
+      "objective_quantile": 0.99,
+      "best_epoch": 80,
+      "best_val_loss": 0.04045991227030754,
+      "best_params": {
+        "type": "autoencoder",
+        "hidden_dims": [
+          64,
+          32
+        ],
+        "activation": "relu",
+        "output_activation": "linear",
+        "optimizer": "adam",
+        "loss": "mse",
+        "reconstruction_error": "mse",
+        "latent_dim": 8,
+        "learning_rate": 0.0036832964384234204,
+        "dropout_rate": 0.0176985004103839,
+        "l2_reg": 1.959828624191452e-05,
+        "batch_norm": true,
+        "input_dim": 115
+      },
+      "train_error_summary": {
+        "mean": 0.031169148162007332,
+        "std": 0.3504650890827179,
+        "min": 0.0003551239497028291,
+        "p50": 0.005300653632730246,
+        "p95": 0.11466973274946213,
+        "p99": 0.32937732338905334,
+        "p99_5": 0.480498731136322,
+        "max": 44.46882629394531
+      },
+      "val_error_summary": {
+        "mean": 0.03396914526820183,
+        "std": 0.30391430854797363,
+        "min": 0.00037171944859437644,
+        "p50": 0.005267341621220112,
+        "p95": 0.10804715007543564,
+        "p99": 0.35521483421325684,
+        "p99_5": 0.6377469301223755,
+        "max": 17.570859909057617
+      }
+    },
+    "device_9": {
+      "n_features": 115,
+      "n_trials": 10,
+      "best_objective_value": 1.2253820896148682,
+      "final_model_validation_objective": 1.3960120677947998,
+      "objective_quantile": 0.99,
+      "best_epoch": 98,
+      "best_val_loss": 0.08071142435073853,
+      "best_params": {
+        "type": "autoencoder",
+        "hidden_dims": [
+          64,
+          32
+        ],
+        "activation": "relu",
+        "output_activation": "linear",
+        "optimizer": "adam",
+        "loss": "mse",
+        "reconstruction_error": "mse",
+        "latent_dim": 8,
+        "learning_rate": 0.0021576967455896826,
+        "dropout_rate": 0.03993475643167195,
+        "l2_reg": 5.1423443841361164e-05,
+        "batch_norm": false,
+        "input_dim": 115
+      },
+      "train_error_summary": {
+        "mean": 0.047950804233551025,
+        "std": 0.21261942386627197,
+        "min": 0.000248769938480109,
+        "p50": 0.0015236895997077227,
+        "p95": 0.23845262825489044,
+        "p99": 0.9913914203643799,
+        "p99_5": 1.503928780555725,
+        "max": 5.32069206237793
+      },
+      "val_error_summary": {
+        "mean": 0.06781327724456787,
+        "std": 0.3910113573074341,
+        "min": 0.000301286403555423,
+        "p50": 0.0015252097509801388,
+        "p95": 0.26347091794013977,
+        "p99": 1.3960120677947998,
+        "p99_5": 2.153794527053833,
+        "max": 9.243902206420898
+      }
+    }
+  }
+}

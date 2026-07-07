@@ -1,0 +1,10 @@
+{
+  "model_size_mb": 0.3238,
+  "n_models": 1,
+  "n_train": 23460,
+  "n_test_benign": 7820,
+  "n_test_attack": 316400,
+  "n_scored_samples": 324220,
+  "inference_time_seconds": 20.813291,
+  "throughput_samples_per_second": 15577.5462
+}

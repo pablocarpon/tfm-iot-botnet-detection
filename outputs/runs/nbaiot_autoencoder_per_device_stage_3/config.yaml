@@ -1,0 +1,49 @@
+experiment:
+  name: nbaiot_autoencoder_per_device_stage_3
+  dataset: nbaiot
+  model: autoencoder
+  strategy: per_device
+  seed: 42
+
+paths:
+  data_dir: data/processed/n_baiot/scaled/per_device
+  stage_2_run_dir: outputs/runs/nbaiot_autoencoder_per_device_stage_2
+
+outputs:
+  output_dir: outputs/runs/nbaiot_autoencoder_per_device_stage_3
+  overwrite: false
+
+devices:
+  - device_1
+  - device_2
+  - device_3
+  - device_4
+  - device_5
+  - device_6
+  - device_7
+  - device_8
+  - device_9
+
+data:
+  train_file: train.parquet
+  test_benign_file: test_benign.parquet
+  test_attack_file: test_attack.parquet
+  metadata_columns:
+    - is_attack
+    - attack_family
+    - attack_type
+
+thresholds:
+  device_1: 0.7588
+  device_2: 0.5914
+  device_3: 0.8101
+  device_4: 0.6234
+  device_5: 0.2667
+  device_6: 0.1756
+  device_7: 1.1105
+  device_8: 0.3552
+  device_9: 1.3960
+
+runtime:
+  log_level: INFO
+  batch_size: 100000

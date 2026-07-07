@@ -1,0 +1,43 @@
+{
+  "model_name": "Base + MSE",
+  "model_config": {
+    "type": "autoencoder",
+    "input_dim": 115,
+    "hidden_dims": [
+      86,
+      57,
+      38
+    ],
+    "latent_dim": 28,
+    "activation": "relu",
+    "output_activation": "linear",
+    "dropout_rate": 0.0,
+    "batch_norm": false,
+    "l2_reg": 0.0,
+    "optimizer": "adam",
+    "learning_rate": 0.001,
+    "loss": "mse",
+    "reconstruction_error": "mse"
+  },
+  "epochs_trained": 100,
+  "best_epoch": 100,
+  "best_val_loss": 0.02013310045003891,
+  "train_error_summary": {
+    "mean": 0.016240831464529037,
+    "std": 0.0727824941277504,
+    "min": 0.00036049913614988327,
+    "p50": 0.0019629490561783314,
+    "p95": 0.06512358784675598,
+    "p99": 0.34591144323349,
+    "max": 1.8155498504638672
+  },
+  "val_error_summary": {
+    "mean": 0.02013310045003891,
+    "std": 0.10909857600927353,
+    "min": 0.0004048562841489911,
+    "p50": 0.0019642957486212254,
+    "p95": 0.07658170908689499,
+    "p99": 0.4122123718261719,
+    "max": 5.259700298309326
+  }
+}

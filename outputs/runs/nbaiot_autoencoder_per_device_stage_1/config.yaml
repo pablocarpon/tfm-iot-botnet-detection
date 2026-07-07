@@ -1,0 +1,130 @@
+experiment:
+  name: nbaiot_autoencoder_per_device_stage_1
+  dataset: nbaiot
+  strategy: per_device_autoencoder_screening
+  seed: 42
+
+paths:
+  data_dir: data/processed/n_baiot/scaled/per_device
+
+outputs:
+  output_dir: outputs/runs/nbaiot_autoencoder_per_device_stage_1
+  overwrite: false
+
+runtime:
+  log_level: INFO
+  gpu_memory_growth: true
+
+devices:
+  - device_1
+  - device_2
+  - device_3
+  - device_4
+  - device_5
+  - device_6
+  - device_7
+  - device_8
+  - device_9
+
+data:
+  train_file: train.parquet
+  val_file: val.parquet
+  metadata_columns:
+    - is_attack
+    - attack_family
+    - attack_type
+
+training:
+  epochs: 100
+  batch_size: 1024
+  verbose: 1
+  shuffle_train: false
+  shuffle_buffer_size: 50000
+  early_stopping:
+    enabled: true
+    monitor: val_loss
+    mode: min
+    patience: 10
+    min_delta: 0.00001
+    restore_best_weights: true
+
+model_configs:
+  - id: model_1_base_mse
+    name: Base + MSE
+    params:
+      type: autoencoder
+      hidden_dims: [86, 57, 38]
+      latent_dim: 28
+      activation: relu
+      output_activation: linear
+      dropout_rate: 0.0
+      batch_norm: false
+      l2_reg: 0.0
+      optimizer: adam
+      learning_rate: 0.001
+      loss: mse
+      reconstruction_error: mse
+
+  - id: model_2_base_mae
+    name: Base + MAE
+    params:
+      type: autoencoder
+      hidden_dims: [86, 57, 38]
+      latent_dim: 28
+      activation: relu
+      output_activation: linear
+      dropout_rate: 0.0
+      batch_norm: false
+      l2_reg: 0.0
+      optimizer: adam
+      learning_rate: 0.001
+      loss: mae
+      reconstruction_error: mae
+
+  - id: model_3_compact_mse
+    name: Compacto + MSE
+    params:
+      type: autoencoder
+      hidden_dims: [64, 32]
+      latent_dim: 16
+      activation: relu
+      output_activation: linear
+      dropout_rate: 0.0
+      batch_norm: false
+      l2_reg: 0.0
+      optimizer: adam
+      learning_rate: 0.001
+      loss: mse
+      reconstruction_error: mse
+
+  - id: model_4_compact_regularized_mse
+    name: Compacto regularizado + MSE
+    params:
+      type: autoencoder
+      hidden_dims: [64, 32]
+      latent_dim: 16
+      activation: leaky_relu
+      output_activation: linear
+      dropout_rate: 0.1
+      batch_norm: true
+      l2_reg: 0.0001
+      optimizer: adam
+      learning_rate: 0.001
+      loss: mse
+      reconstruction_error: mse
+
+  - id: model_5_compact_regularized_mae
+    name: Compacto regularizado + MAE
+    params:
+      type: autoencoder
+      hidden_dims: [64, 32]
+      latent_dim: 16
+      activation: leaky_relu
+      output_activation: linear
+      dropout_rate: 0.1
+      batch_norm: true
+      l2_reg: 0.0001
+      optimizer: adam
+      learning_rate: 0.001
+      loss: mae
+      reconstruction_error: mae

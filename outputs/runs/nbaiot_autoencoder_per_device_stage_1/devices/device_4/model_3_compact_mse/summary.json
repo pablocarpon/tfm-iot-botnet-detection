@@ -1,0 +1,42 @@
+{
+  "model_name": "Compacto + MSE",
+  "model_config": {
+    "type": "autoencoder",
+    "input_dim": 115,
+    "hidden_dims": [
+      64,
+      32
+    ],
+    "latent_dim": 16,
+    "activation": "relu",
+    "output_activation": "linear",
+    "dropout_rate": 0.0,
+    "batch_norm": false,
+    "l2_reg": 0.0,
+    "optimizer": "adam",
+    "learning_rate": 0.001,
+    "loss": "mse",
+    "reconstruction_error": "mse"
+  },
+  "epochs_trained": 100,
+  "best_epoch": 99,
+  "best_val_loss": 0.013588834553956985,
+  "train_error_summary": {
+    "mean": 0.01381500530987978,
+    "std": 0.07550758868455887,
+    "min": 0.0002649743400979787,
+    "p50": 0.0015940967714414,
+    "p95": 0.04962056875228882,
+    "p99": 0.28768694400787354,
+    "max": 11.242026329040527
+  },
+  "val_error_summary": {
+    "mean": 0.01358883548527956,
+    "std": 0.06465543806552887,
+    "min": 0.00028898086748085916,
+    "p50": 0.0015864702872931957,
+    "p95": 0.04803445562720299,
+    "p99": 0.2836533784866333,
+    "max": 1.9634696245193481
+  }
+}

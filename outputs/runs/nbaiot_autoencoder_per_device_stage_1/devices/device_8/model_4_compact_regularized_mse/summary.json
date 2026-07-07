@@ -1,0 +1,42 @@
+{
+  "model_name": "Compacto regularizado + MSE",
+  "model_config": {
+    "type": "autoencoder",
+    "input_dim": 115,
+    "hidden_dims": [
+      64,
+      32
+    ],
+    "latent_dim": 16,
+    "activation": "leaky_relu",
+    "output_activation": "linear",
+    "dropout_rate": 0.1,
+    "batch_norm": true,
+    "l2_reg": 0.0001,
+    "optimizer": "adam",
+    "learning_rate": 0.001,
+    "loss": "mse",
+    "reconstruction_error": "mse"
+  },
+  "epochs_trained": 74,
+  "best_epoch": 64,
+  "best_val_loss": 0.0959814190864563,
+  "train_error_summary": {
+    "mean": 0.08244876563549042,
+    "std": 0.9565666317939758,
+    "min": 0.0008247588411904871,
+    "p50": 0.013330759480595589,
+    "p95": 0.3139136731624603,
+    "p99": 1.0705854892730713,
+    "max": 115.73385620117188
+  },
+  "val_error_summary": {
+    "mean": 0.07878018915653229,
+    "std": 0.5200061202049255,
+    "min": 0.0008535960805602372,
+    "p50": 0.013004856184124947,
+    "p95": 0.29876455664634705,
+    "p99": 1.0973566770553589,
+    "max": 27.597137451171875
+  }
+}

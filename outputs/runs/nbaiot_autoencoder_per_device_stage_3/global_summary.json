@@ -1,0 +1,136 @@
+{
+  "experiment_name": "nbaiot_autoencoder_per_device_stage_3",
+  "dataset": "nbaiot",
+  "model": "autoencoder",
+  "strategy": "per_device",
+  "seed": 42,
+  "n_devices": 9,
+  "devices": {
+    "device_1": {
+      "threshold": 0.7588,
+      "test_predictions_path": "outputs/runs/nbaiot_autoencoder_per_device_stage_3/devices/device_1/test_predictions.parquet",
+      "scalability": {
+        "model_size_mb": 0.2887,
+        "n_models": 1,
+        "n_train": 29728,
+        "n_test_benign": 9910,
+        "n_test_attack": 968750,
+        "n_scored_samples": 978660,
+        "inference_time_seconds": 45.46858,
+        "throughput_samples_per_second": 21523.8744
+      }
+    },
+    "device_2": {
+      "threshold": 0.5914,
+      "test_predictions_path": "outputs/runs/nbaiot_autoencoder_per_device_stage_3/devices/device_2/test_predictions.parquet",
+      "scalability": {
+        "model_size_mb": 0.3238,
+        "n_models": 1,
+        "n_train": 7867,
+        "n_test_benign": 2623,
+        "n_test_attack": 822763,
+        "n_scored_samples": 825386,
+        "inference_time_seconds": 51.315741,
+        "throughput_samples_per_second": 16084.4602
+      }
+    },
+    "device_3": {
+      "threshold": 0.8101,
+      "test_predictions_path": "outputs/runs/nbaiot_autoencoder_per_device_stage_3/devices/device_3/test_predictions.parquet",
+      "scalability": {
+        "model_size_mb": 0.3238,
+        "n_models": 1,
+        "n_train": 23460,
+        "n_test_benign": 7820,
+        "n_test_attack": 316400,
+        "n_scored_samples": 324220,
+        "inference_time_seconds": 20.813291,
+        "throughput_samples_per_second": 15577.5462
+      }
+    },
+    "device_4": {
+      "threshold": 0.6234,
+      "test_predictions_path": "outputs/runs/nbaiot_autoencoder_per_device_stage_3/devices/device_4/test_predictions.parquet",
+      "scalability": {
+        "model_size_mb": 0.33,
+        "n_models": 1,
+        "n_train": 105144,
+        "n_test_benign": 35048,
+        "n_test_attack": 923437,
+        "n_scored_samples": 958485,
+        "inference_time_seconds": 58.772465,
+        "throughput_samples_per_second": 16308.4022
+      }
+    },
+    "device_5": {
+      "threshold": 0.2667,
+      "test_predictions_path": "outputs/runs/nbaiot_autoencoder_per_device_stage_3/devices/device_5/test_predictions.parquet",
+      "scalability": {
+        "model_size_mb": 0.3238,
+        "n_models": 1,
+        "n_train": 37292,
+        "n_test_benign": 12431,
+        "n_test_attack": 766106,
+        "n_scored_samples": 778537,
+        "inference_time_seconds": 48.325222,
+        "throughput_samples_per_second": 16110.3656
+      }
+    },
+    "device_6": {
+      "threshold": 0.1756,
+      "test_predictions_path": "outputs/runs/nbaiot_autoencoder_per_device_stage_3/devices/device_6/test_predictions.parquet",
+      "scalability": {
+        "model_size_mb": 0.3238,
+        "n_models": 1,
+        "n_train": 59108,
+        "n_test_benign": 19703,
+        "n_test_attack": 738377,
+        "n_scored_samples": 758080,
+        "inference_time_seconds": 51.206243,
+        "throughput_samples_per_second": 14804.4448
+      }
+    },
+    "device_7": {
+      "threshold": 1.1105,
+      "test_predictions_path": "outputs/runs/nbaiot_autoencoder_per_device_stage_3/devices/device_7/test_predictions.parquet",
+      "scalability": {
+        "model_size_mb": 0.3238,
+        "n_models": 1,
+        "n_train": 31290,
+        "n_test_benign": 10430,
+        "n_test_attack": 323072,
+        "n_scored_samples": 333502,
+        "inference_time_seconds": 26.359312,
+        "throughput_samples_per_second": 12652.151
+      }
+    },
+    "device_8": {
+      "threshold": 0.3552,
+      "test_predictions_path": "outputs/runs/nbaiot_autoencoder_per_device_stage_3/devices/device_8/test_predictions.parquet",
+      "scalability": {
+        "model_size_mb": 0.3238,
+        "n_models": 1,
+        "n_train": 27951,
+        "n_test_benign": 9317,
+        "n_test_attack": 816471,
+        "n_scored_samples": 825788,
+        "inference_time_seconds": 61.551883,
+        "throughput_samples_per_second": 13416.129
+      }
+    },
+    "device_9": {
+      "threshold": 1.396,
+      "test_predictions_path": "outputs/runs/nbaiot_autoencoder_per_device_stage_3/devices/device_9/test_predictions.parquet",
+      "scalability": {
+        "model_size_mb": 0.2887,
+        "n_models": 1,
+        "n_train": 11716,
+        "n_test_benign": 3906,
+        "n_test_attack": 831298,
+        "n_scored_samples": 835204,
+        "inference_time_seconds": 42.502782,
+        "throughput_samples_per_second": 19650.5727
+      }
+    }
+  }
+}

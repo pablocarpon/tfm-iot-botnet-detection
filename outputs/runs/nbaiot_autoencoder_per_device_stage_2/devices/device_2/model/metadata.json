@@ -1,0 +1,17 @@
+{
+    "input_dim": 115,
+    "latent_dim": 8,
+    "hidden_dims": [
+        64,
+        32
+    ],
+    "activation": "relu",
+    "output_activation": "linear",
+    "dropout_rate": 0.0176985004103839,
+    "batch_norm": true,
+    "l2_reg": 1.959828624191452e-05,
+    "optimizer": "adam",
+    "learning_rate": 0.0036832964384234204,
+    "loss": "mse",
+    "reconstruction_error": "mse"
+}

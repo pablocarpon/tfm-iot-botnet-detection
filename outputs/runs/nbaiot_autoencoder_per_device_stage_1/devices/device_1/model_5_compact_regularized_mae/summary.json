@@ -1,0 +1,42 @@
+{
+  "model_name": "Compacto regularizado + MAE",
+  "model_config": {
+    "type": "autoencoder",
+    "input_dim": 115,
+    "hidden_dims": [
+      64,
+      32
+    ],
+    "latent_dim": 16,
+    "activation": "leaky_relu",
+    "output_activation": "linear",
+    "dropout_rate": 0.1,
+    "batch_norm": true,
+    "l2_reg": 0.0001,
+    "optimizer": "adam",
+    "learning_rate": 0.001,
+    "loss": "mae",
+    "reconstruction_error": "mae"
+  },
+  "epochs_trained": 100,
+  "best_epoch": 99,
+  "best_val_loss": 0.0815613865852356,
+  "train_error_summary": {
+    "mean": 0.07353951036930084,
+    "std": 0.3443726599216461,
+    "min": 0.0057538277469575405,
+    "p50": 0.030182652175426483,
+    "p95": 0.19254480302333832,
+    "p99": 0.504967212677002,
+    "max": 15.438117027282715
+  },
+  "val_error_summary": {
+    "mean": 0.07629718631505966,
+    "std": 0.4231583774089813,
+    "min": 0.0070777530781924725,
+    "p50": 0.030545946210622787,
+    "p95": 0.20533685386180878,
+    "p99": 0.5074309706687927,
+    "max": 15.438117027282715
+  }
+}
