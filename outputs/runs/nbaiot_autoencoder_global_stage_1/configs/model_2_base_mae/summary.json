@@ -1,0 +1,42 @@
+{
+  "model_name": "Base + MAE",
+  "model_config": {
+    "type": "autoencoder",
+    "input_dim": 115,
+    "hidden_dims": [
+      64,
+      24
+    ],
+    "latent_dim": 6,
+    "activation": "relu",
+    "output_activation": "linear",
+    "dropout_rate": 0.0,
+    "batch_norm": false,
+    "l2_reg": 0.0,
+    "optimizer": "adam",
+    "learning_rate": 0.001,
+    "loss": "mae",
+    "reconstruction_error": "mae"
+  },
+  "epochs_trained": 67,
+  "best_epoch": 57,
+  "best_val_loss": 0.10975588858127594,
+  "train_error_summary": {
+    "mean": 0.11039172112941742,
+    "std": 0.18909984827041626,
+    "min": 0.008127880282700062,
+    "p50": 0.05761953443288803,
+    "p95": 0.3567606210708618,
+    "p99": 1.0607315301895142,
+    "max": 4.03148078918457
+  },
+  "val_error_summary": {
+    "mean": 0.10975588113069534,
+    "std": 0.1873597949743271,
+    "min": 0.008231155574321747,
+    "p50": 0.05733608454465866,
+    "p95": 0.3577335476875305,
+    "p99": 1.0347704887390137,
+    "max": 4.03148078918457
+  }
+}

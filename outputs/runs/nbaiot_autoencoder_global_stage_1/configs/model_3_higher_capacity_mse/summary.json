@@ -1,0 +1,43 @@
+{
+  "model_name": "Mayor capacidad + MSE",
+  "model_config": {
+    "type": "autoencoder",
+    "input_dim": 115,
+    "hidden_dims": [
+      86,
+      57,
+      38
+    ],
+    "latent_dim": 12,
+    "activation": "relu",
+    "output_activation": "linear",
+    "dropout_rate": 0.0,
+    "batch_norm": false,
+    "l2_reg": 0.0,
+    "optimizer": "adam",
+    "learning_rate": 0.001,
+    "loss": "mse",
+    "reconstruction_error": "mse"
+  },
+  "epochs_trained": 82,
+  "best_epoch": 72,
+  "best_val_loss": 0.03230031207203865,
+  "train_error_summary": {
+    "mean": 0.03231295570731163,
+    "std": 0.1308155655860901,
+    "min": 0.0004469765699468553,
+    "p50": 0.006853352300822735,
+    "p95": 0.11700381338596344,
+    "p99": 0.4508393406867981,
+    "max": 10.597284317016602
+  },
+  "val_error_summary": {
+    "mean": 0.03230031579732895,
+    "std": 0.13525107502937317,
+    "min": 0.0004212440981063992,
+    "p50": 0.006825339049100876,
+    "p95": 0.11783897876739502,
+    "p99": 0.43638578057289124,
+    "max": 11.119017601013184
+  }
+}

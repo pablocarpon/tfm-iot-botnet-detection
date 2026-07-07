@@ -1,0 +1,80 @@
+experiment:
+  name: nbaiot_autoencoder_global_stage_2
+  dataset: nbaiot
+  strategy: global_autoencoder_optimization
+  seed: 42
+
+paths:
+  data_dir: data/processed/n_baiot/scaled/global
+
+outputs:
+  output_dir: outputs/runs/nbaiot_autoencoder_global_stage_2
+  overwrite: false
+
+runtime:
+  log_level: INFO
+  gpu_memory_growth: true
+
+data:
+  train_file: train.parquet
+  val_file: val.parquet
+  metadata_columns:
+    - is_attack
+    - attack_family
+    - attack_type
+    - device_id
+
+optimization:
+  n_trials: 10
+  objective_quantile: 0.99
+
+training:
+  epochs: 100
+  batch_size: 2048
+  verbose: 1
+  shuffle_train: true
+  shuffle_buffer_size: 50000
+  early_stopping:
+    enabled: true
+    monitor: val_loss
+    mode: min
+    patience: 10
+    min_delta: 0.00001
+    restore_best_weights: true
+  reduce_lr_on_plateau:
+    enabled: true
+    monitor: val_loss
+    mode: min
+    factor: 0.5
+    patience: 5
+    min_delta: 0.00001
+    min_lr: 0.000001
+
+final_training:
+  epochs: 200
+
+model:
+  type: autoencoder
+  fixed_params:
+    hidden_dims: [86, 57, 38]
+    activation: relu
+    output_activation: linear
+    optimizer: adam
+    loss: mse
+    reconstruction_error: mse
+    batch_norm: false
+
+search_space:
+  latent_dim:
+    choices: [4, 8, 12, 16]
+
+  learning_rate:
+    low: 0.0001
+    high: 0.005
+    log: true
+
+  dropout_rate:
+    choices: [0.0, 0.05, 0.1, 0.15, 0.2]
+
+  l2_reg:
+    choices: [0.0, 0.000001, 0.00001, 0.0001]

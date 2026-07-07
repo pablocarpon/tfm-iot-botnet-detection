@@ -1,0 +1,99 @@
+{
+  "experiment_name": "nbaiot_autoencoder_global_stage_2",
+  "dataset": "nbaiot",
+  "model": "autoencoder",
+  "strategy": "global_autoencoder_optimization",
+  "seed": 42,
+  "stage": 2,
+  "n_features": 115,
+  "n_trials": 10,
+  "objective": "minimize_p99_validation_reconstruction_error",
+  "objective_quantile": 0.99,
+  "optimization_training": {
+    "epochs": 100,
+    "batch_size": 2048,
+    "shuffle_train": true,
+    "early_stopping": {
+      "enabled": true,
+      "monitor": "val_loss",
+      "mode": "min",
+      "patience": 10,
+      "min_delta": 1e-05,
+      "restore_best_weights": true
+    },
+    "reduce_lr_on_plateau": {
+      "enabled": true,
+      "monitor": "val_loss",
+      "mode": "min",
+      "factor": 0.5,
+      "patience": 5,
+      "min_delta": 1e-05,
+      "min_lr": 1e-06
+    }
+  },
+  "final_training": {
+    "epochs": 200,
+    "batch_size": 2048,
+    "shuffle_train": true,
+    "early_stopping": {
+      "enabled": true,
+      "monitor": "val_loss",
+      "mode": "min",
+      "patience": 10,
+      "min_delta": 1e-05,
+      "restore_best_weights": true
+    },
+    "reduce_lr_on_plateau": {
+      "enabled": true,
+      "monitor": "val_loss",
+      "mode": "min",
+      "factor": 0.5,
+      "patience": 5,
+      "min_delta": 1e-05,
+      "min_lr": 1e-06
+    }
+  },
+  "best_objective_value": 0.6278550028800964,
+  "final_model_validation_objective": 0.5561667680740356,
+  "best_epoch": 142,
+  "best_val_loss": 0.05964573100209236,
+  "best_params": {
+    "type": "autoencoder",
+    "hidden_dims": [
+      86,
+      57,
+      38
+    ],
+    "activation": "relu",
+    "output_activation": "linear",
+    "optimizer": "adam",
+    "loss": "mse",
+    "reconstruction_error": "mse",
+    "batch_norm": false,
+    "latent_dim": 16,
+    "learning_rate": 0.00045745782054754043,
+    "dropout_rate": 0.05,
+    "l2_reg": 0.0001,
+    "input_dim": 115
+  },
+  "train_error_summary": {
+    "mean": 0.03753744810819626,
+    "std": 0.18177904188632965,
+    "min": 0.0003900235169567168,
+    "p50": 0.006467868573963642,
+    "p95": 0.11747536063194275,
+    "p99": 0.5756986737251282,
+    "p99_5": 0.9710608124732971,
+    "max": 17.786767959594727
+  },
+  "val_error_summary": {
+    "mean": 0.03714243322610855,
+    "std": 0.1887328028678894,
+    "min": 0.0003796190721914172,
+    "p50": 0.006437133066356182,
+    "p95": 0.1184898242354393,
+    "p99": 0.5561667680740356,
+    "p99_5": 0.9208155274391174,
+    "max": 18.87489128112793
+  }
+}

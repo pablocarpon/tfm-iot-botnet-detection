@@ -1,0 +1,31 @@
+experiment:
+  name: nbaiot_autoencoder_global_stage_3
+  dataset: n_baiot
+  model: autoencoder
+  strategy: global_autoencoder
+  seed: 42
+
+paths:
+  data_dir: data/processed/n_baiot/scaled/global
+  stage_2_run_dir: outputs/runs/nbaiot_autoencoder_global_stage_2
+
+data:
+  test_benign_file: test_benign.parquet
+  test_attack_file: test_attack.parquet
+  metadata_columns:
+    - device_id
+    - is_attack
+    - attack_family
+    - attack_type
+
+threshold:
+  value: 0.5562
+  criterion: p99
+
+outputs:
+  output_dir: outputs/runs/nbaiot_autoencoder_global_stage_3
+  overwrite: false
+
+runtime:
+  batch_size: 100000
+  log_level: INFO

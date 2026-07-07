@@ -1,0 +1,43 @@
+{
+  "model_name": "Mayor capacidad regularizado + MSE",
+  "model_config": {
+    "type": "autoencoder",
+    "input_dim": 115,
+    "hidden_dims": [
+      86,
+      57,
+      38
+    ],
+    "latent_dim": 12,
+    "activation": "leaky_relu",
+    "output_activation": "linear",
+    "dropout_rate": 0.1,
+    "batch_norm": true,
+    "l2_reg": 0.0001,
+    "optimizer": "adam",
+    "learning_rate": 0.001,
+    "loss": "mse",
+    "reconstruction_error": "mse"
+  },
+  "epochs_trained": 54,
+  "best_epoch": 44,
+  "best_val_loss": 0.32301461696624756,
+  "train_error_summary": {
+    "mean": 0.303812175989151,
+    "std": 1.3109607696533203,
+    "min": 0.01122324913740158,
+    "p50": 0.06421010196208954,
+    "p95": 1.0114222764968872,
+    "p99": 4.656927108764648,
+    "max": 65.61466217041016
+  },
+  "val_error_summary": {
+    "mean": 0.29552537202835083,
+    "std": 1.2726975679397583,
+    "min": 0.011435328982770443,
+    "p50": 0.0642547756433487,
+    "p95": 1.0085195302963257,
+    "p99": 4.180811882019043,
+    "max": 78.56394958496094
+  }
+}

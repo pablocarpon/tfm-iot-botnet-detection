@@ -1,0 +1,18 @@
+{
+  "type": "autoencoder",
+  "input_dim": 115,
+  "hidden_dims": [
+    64,
+    24
+  ],
+  "latent_dim": 6,
+  "activation": "leaky_relu",
+  "output_activation": "linear",
+  "dropout_rate": 0.1,
+  "batch_norm": true,
+  "l2_reg": 0.0001,
+  "optimizer": "adam",
+  "learning_rate": 0.001,
+  "loss": "mse",
+  "reconstruction_error": "mse"
+}

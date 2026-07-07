@@ -1,0 +1,19 @@
+{
+  "experiment_name": "nbaiot_autoencoder_global_stage_3",
+  "dataset": "n_baiot",
+  "model": "autoencoder",
+  "strategy": "global_autoencoder",
+  "seed": 42,
+  "stage": 3,
+  "n_features": 115,
+  "threshold": 0.5562,
+  "threshold_criterion": "p99",
+  "model_dir": "outputs/runs/nbaiot_autoencoder_global_stage_2/model",
+  "test_predictions_path": "outputs/runs/nbaiot_autoencoder_global_stage_3/test_predictions.parquet",
+  "n_test_benign": 111188,
+  "n_test_attack": 6506674,
+  "model_size_mb": 0.4908,
+  "n_scored_samples": 6617862,
+  "inference_time_seconds": 428.953513,
+  "throughput_samples_per_second": 15427.9235
+}
