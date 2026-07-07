@@ -46,6 +46,7 @@ def _build_autoencoder(model_config: dict[str, Any]) -> AutoencoderDetector:
         output_activation=model_config.get("output_activation", "linear"),
         dropout_rate=model_config.get("dropout_rate", 0.0),
         batch_norm=model_config.get("batch_norm", False),
+        l2_reg=model_config.get("l2_reg", 0.0),
         optimizer=model_config.get("optimizer", "adam"),
         learning_rate=model_config.get("learning_rate", 1e-3),
         loss=model_config.get("loss", "mse"),

@@ -22,6 +22,7 @@ class AutoencoderDetector:
         output_activation: str = "linear",
         dropout_rate: float = 0.0,
         batch_norm: bool = False,
+        l2_reg: float = 0.0,
         optimizer: str = "adam",
         learning_rate: float = 1e-3,
         loss: str = "mse",
@@ -33,15 +34,16 @@ class AutoencoderDetector:
                 f"Valid values are {sorted(self.VALID_RECONSTRUCTION_ERRORS)}."
             )
 
-        self.input_dim = input_dim
-        self.latent_dim = latent_dim
+        self.input_dim = int(input_dim)
+        self.latent_dim = int(latent_dim)
         self.hidden_dims = hidden_dims or [86, 57, 38]
         self.activation = activation
         self.output_activation = output_activation
-        self.dropout_rate = dropout_rate
-        self.batch_norm = batch_norm
+        self.dropout_rate = float(dropout_rate)
+        self.batch_norm = bool(batch_norm)
+        self.l2_reg = float(l2_reg)
         self.optimizer = optimizer
-        self.learning_rate = learning_rate
+        self.learning_rate = float(learning_rate)
         self.loss = loss
         self.reconstruction_error = reconstruction_error
 
@@ -53,56 +55,36 @@ class AutoencoderDetector:
 
     def _build_model(self) -> tuple[tf.keras.Model, tf.keras.Model]:
         inputs = tf.keras.Input(shape=(self.input_dim,), name="input")
-
         x = inputs
 
         for index, hidden_dim in enumerate(self.hidden_dims):
-            x = tf.keras.layers.Dense(
-                hidden_dim,
-                activation=self.activation,
-                name=f"encoder_dense_{index + 1}",
-            )(x)
+            x = self._dense_block(
+                x,
+                units=int(hidden_dim),
+                name_prefix=f"encoder_{index + 1}",
+            )
 
-            if self.batch_norm:
-                x = tf.keras.layers.BatchNormalization(
-                    name=f"encoder_batch_norm_{index + 1}"
-                )(x)
-
-            if self.dropout_rate > 0:
-                x = tf.keras.layers.Dropout(
-                    self.dropout_rate,
-                    name=f"encoder_dropout_{index + 1}",
-                )(x)
-
-        latent = tf.keras.layers.Dense(
-            self.latent_dim,
-            activation=self.activation,
-            name="latent",
-        )(x)
+        latent = self._dense_block(
+            x,
+            units=self.latent_dim,
+            name_prefix="latent",
+            apply_dropout=False,
+            dense_name="latent",
+        )
 
         x = latent
 
         for index, hidden_dim in enumerate(reversed(self.hidden_dims)):
-            x = tf.keras.layers.Dense(
-                hidden_dim,
-                activation=self.activation,
-                name=f"decoder_dense_{index + 1}",
-            )(x)
-
-            if self.batch_norm:
-                x = tf.keras.layers.BatchNormalization(
-                    name=f"decoder_batch_norm_{index + 1}"
-                )(x)
-
-            if self.dropout_rate > 0:
-                x = tf.keras.layers.Dropout(
-                    self.dropout_rate,
-                    name=f"decoder_dropout_{index + 1}",
-                )(x)
+            x = self._dense_block(
+                x,
+                units=int(hidden_dim),
+                name_prefix=f"decoder_{index + 1}",
+            )
 
         outputs = tf.keras.layers.Dense(
             self.input_dim,
             activation=self.output_activation,
+            kernel_regularizer=self._kernel_regularizer(),
             name="reconstruction",
         )(x)
 
@@ -110,6 +92,54 @@ class AutoencoderDetector:
         encoder = tf.keras.Model(inputs=inputs, outputs=latent, name="encoder")
 
         return autoencoder, encoder
+
+    def _dense_block(
+        self,
+        x: tf.Tensor,
+        *,
+        units: int,
+        name_prefix: str,
+        apply_dropout: bool = True,
+        dense_name: str | None = None,
+    ) -> tf.Tensor:
+        """Bloque denso configurable.
+
+        Orden aplicado:
+        Dense -> BatchNorm opcional -> activación -> Dropout opcional.
+        """
+        x = tf.keras.layers.Dense(
+            units,
+            activation=None,
+            kernel_regularizer=self._kernel_regularizer(),
+            name=dense_name or f"{name_prefix}_dense",
+        )(x)
+
+        if self.batch_norm:
+            x = tf.keras.layers.BatchNormalization(name=f"{name_prefix}_batch_norm")(x)
+
+        x = self._activation_layer(name=f"{name_prefix}_activation")(x)
+
+        if apply_dropout and self.dropout_rate > 0:
+            x = tf.keras.layers.Dropout(
+                self.dropout_rate,
+                name=f"{name_prefix}_dropout",
+            )(x)
+
+        return x
+
+    def _activation_layer(self, *, name: str) -> tf.keras.layers.Layer:
+        activation_name = self.activation.lower()
+
+        if activation_name in {"leaky_relu", "leakyrelu"}:
+            return tf.keras.layers.LeakyReLU(negative_slope=0.01, name=name)
+
+        return tf.keras.layers.Activation(self.activation, name=name)
+
+    def _kernel_regularizer(self) -> tf.keras.regularizers.Regularizer | None:
+        if self.l2_reg <= 0:
+            return None
+
+        return tf.keras.regularizers.l2(self.l2_reg)
 
     def _build_optimizer(self) -> tf.keras.optimizers.Optimizer:
         optimizer_name = self.optimizer.lower()
@@ -206,7 +236,7 @@ class AutoencoderDetector:
 
         metadata = self.get_params()
         with (path / "metadata.json").open("w", encoding="utf-8") as file:
-            json.dump(metadata, file, indent=4)
+            json.dump(metadata, file, indent=4, ensure_ascii=False)
 
     @classmethod
     def load(cls, path: str | Path) -> "AutoencoderDetector":
@@ -241,6 +271,7 @@ class AutoencoderDetector:
             "output_activation": self.output_activation,
             "dropout_rate": self.dropout_rate,
             "batch_norm": self.batch_norm,
+            "l2_reg": self.l2_reg,
             "optimizer": self.optimizer,
             "learning_rate": self.learning_rate,
             "loss": self.loss,
@@ -273,6 +304,9 @@ class AutoencoderDetector:
                     x_batch = x_batch.numpy()
 
                 batches.append(np.asarray(x_batch, dtype=np.float32))
+
+            if not batches:
+                raise ValueError("Cannot score an empty tf.data.Dataset.")
 
             return np.concatenate(batches, axis=0)
 
