@@ -14,7 +14,10 @@
         "n_models": 1,
         "n_train": 29728,
         "n_test_benign": 9910,
-        "n_test_attack": 968750
+        "n_test_attack": 968750,
+        "n_scored_samples": 978660,
+        "inference_time_seconds": 29.557732,
+        "throughput_samples_per_second": 33110.1179
       }
     },
     "device_2": {
@@ -25,7 +28,10 @@
         "n_models": 1,
         "n_train": 7867,
         "n_test_benign": 2623,
-        "n_test_attack": 822763
+        "n_test_attack": 822763,
+        "n_scored_samples": 825386,
+        "inference_time_seconds": 9.726357,
+        "throughput_samples_per_second": 84860.752
       }
     },
     "device_3": {
@@ -36,7 +42,10 @@
         "n_models": 1,
         "n_train": 23460,
         "n_test_benign": 7820,
-        "n_test_attack": 316400
+        "n_test_attack": 316400,
+        "n_scored_samples": 324220,
+        "inference_time_seconds": 9.14355,
+        "throughput_samples_per_second": 35458.8742
       }
     },
     "device_4": {
@@ -47,7 +56,10 @@
         "n_models": 1,
         "n_train": 105144,
         "n_test_benign": 35048,
-        "n_test_attack": 923437
+        "n_test_attack": 923437,
+        "n_scored_samples": 958485,
+        "inference_time_seconds": 100.91161,
+        "throughput_samples_per_second": 9498.2629
       }
     },
     "device_5": {
@@ -58,7 +70,10 @@
         "n_models": 1,
         "n_train": 37292,
         "n_test_benign": 12431,
-        "n_test_attack": 766106
+        "n_test_attack": 766106,
+        "n_scored_samples": 778537,
+        "inference_time_seconds": 27.654745,
+        "throughput_samples_per_second": 28152.0221
       }
     },
     "device_6": {
@@ -69,7 +84,10 @@
         "n_models": 1,
         "n_train": 59108,
         "n_test_benign": 19703,
-        "n_test_attack": 738377
+        "n_test_attack": 738377,
+        "n_scored_samples": 758080,
+        "inference_time_seconds": 41.60433,
+        "throughput_samples_per_second": 18221.1805
       }
     },
     "device_7": {
@@ -80,7 +98,10 @@
         "n_models": 1,
         "n_train": 31290,
         "n_test_benign": 10430,
-        "n_test_attack": 323072
+        "n_test_attack": 323072,
+        "n_scored_samples": 333502,
+        "inference_time_seconds": 10.334511,
+        "throughput_samples_per_second": 32270.7104
       }
     },
     "device_8": {
@@ -91,7 +112,10 @@
         "n_models": 1,
         "n_train": 27951,
         "n_test_benign": 9317,
-        "n_test_attack": 816471
+        "n_test_attack": 816471,
+        "n_scored_samples": 825788,
+        "inference_time_seconds": 22.568131,
+        "throughput_samples_per_second": 36590.8903
       }
     },
     "device_9": {
@@ -102,7 +126,10 @@
         "n_models": 1,
         "n_train": 11716,
         "n_test_benign": 3906,
-        "n_test_attack": 831298
+        "n_test_attack": 831298,
+        "n_scored_samples": 835204,
+        "inference_time_seconds": 9.552758,
+        "throughput_samples_per_second": 87430.6687
       }
     }
   }

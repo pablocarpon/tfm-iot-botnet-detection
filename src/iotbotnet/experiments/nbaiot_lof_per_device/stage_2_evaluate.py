@@ -4,6 +4,7 @@ import gc
 import json
 import logging
 import shutil
+import time
 from pathlib import Path
 from typing import Any
 
@@ -23,7 +24,7 @@ def run_nbaiot_lof_per_device_stage_2(config_path: str | Path) -> dict[str, Any]
     generar artefactos de evaluación reutilizables por los notebooks de análisis:
 
     1. Predicciones completas sobre test_benign + test_attack.
-    2. Información básica de escalabilidad independiente, en lo posible, del hardware.
+    2. Información de escalabilidad y throughput de inferencia.
 
     Convención:
     - y_true = 0 para muestra benigna.
@@ -98,7 +99,7 @@ def run_nbaiot_lof_per_device_stage_2(config_path: str | Path) -> dict[str, Any]
 
         LOGGER.info("[%s] Generando predicciones sobre el conjunto de test completo", device)
         test_predictions_path = device_output_dir / "test_predictions.parquet"
-        _score_test_splits_to_parquet(
+        inference_summary = _score_test_splits_to_parquet(
             model=model,
             benign_path=test_benign_path,
             attack_path=test_attack_path,
@@ -117,6 +118,7 @@ def run_nbaiot_lof_per_device_stage_2(config_path: str | Path) -> dict[str, Any]
             "n_train": _count_parquet_rows(train_path),
             "n_test_benign": _count_parquet_rows(test_benign_path),
             "n_test_attack": _count_parquet_rows(test_attack_path),
+            **inference_summary,
         }
         _save_json(device_output_dir / "scalability.json", scalability)
 
@@ -141,7 +143,7 @@ def _score_test_splits_to_parquet(
     threshold: float,
     output_path: Path,
     batch_size: int,
-) -> None:
+) -> dict[str, Any]:
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     schema = pa.schema(
@@ -155,11 +157,13 @@ def _score_test_splits_to_parquet(
     )
 
     writer: pq.ParquetWriter | None = None
+    total_scored_samples = 0
+    total_inference_time_seconds = 0.0
 
     try:
         writer = pq.ParquetWriter(output_path, schema=schema)
 
-        _score_split_batches_to_writer(
+        benign_summary = _score_split_batches_to_writer(
             model=model,
             parquet_path=benign_path,
             feature_columns=feature_columns,
@@ -169,7 +173,10 @@ def _score_test_splits_to_parquet(
             batch_size=batch_size,
         )
 
-        _score_split_batches_to_writer(
+        total_scored_samples += benign_summary["n_scored_samples"]
+        total_inference_time_seconds += benign_summary["inference_time_seconds"]
+
+        attack_summary = _score_split_batches_to_writer(
             model=model,
             parquet_path=attack_path,
             feature_columns=feature_columns,
@@ -179,9 +186,26 @@ def _score_test_splits_to_parquet(
             batch_size=batch_size,
         )
 
+        total_scored_samples += attack_summary["n_scored_samples"]
+        total_inference_time_seconds += attack_summary["inference_time_seconds"]
+
     finally:
         if writer is not None:
             writer.close()
+
+    throughput = (
+        total_scored_samples / total_inference_time_seconds
+        if total_inference_time_seconds > 0
+        else None
+    )
+
+    return {
+        "n_scored_samples": int(total_scored_samples),
+        "inference_time_seconds": round(float(total_inference_time_seconds), 6),
+        "throughput_samples_per_second": round(float(throughput), 4)
+        if throughput is not None
+        else None,
+    }
 
 
 def _score_split_batches_to_writer(
@@ -192,11 +216,13 @@ def _score_split_batches_to_writer(
     threshold: float,
     writer: pq.ParquetWriter,
     batch_size: int,
-) -> None:
+) -> dict[str, Any]:
     required_metadata_columns = ["attack_family", "attack_type"]
     columns_to_read = feature_columns + required_metadata_columns
 
     parquet_file = pq.ParquetFile(parquet_path)
+    n_scored_samples = 0
+    inference_time_seconds = 0.0
 
     for record_batch in parquet_file.iter_batches(
         batch_size=batch_size,
@@ -205,7 +231,10 @@ def _score_split_batches_to_writer(
         batch_df = record_batch.to_pandas()
 
         X = batch_df[feature_columns].to_numpy(dtype=np.float32, copy=True)
+        start_time = time.perf_counter()
         scores = model.score_samples(X).astype(np.float32, copy=False)
+        inference_time_seconds += time.perf_counter() - start_time
+
         y_pred = (scores > threshold).astype(np.int8, copy=False)
         y_true_array = np.full(shape=scores.shape, fill_value=y_true, dtype=np.int8)
 
@@ -221,8 +250,15 @@ def _score_split_batches_to_writer(
         )
         writer.write_table(table)
 
+        n_scored_samples += int(scores.shape[0])
+
         del record_batch, batch_df, X, scores, y_pred, y_true_array, table
         gc.collect()
+
+    return {
+        "n_scored_samples": n_scored_samples,
+        "inference_time_seconds": inference_time_seconds,
+    }
 
 
 def _load_model(path: Path) -> Any:

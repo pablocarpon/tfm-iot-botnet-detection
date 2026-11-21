@@ -3,5 +3,8 @@
   "n_models": 1,
   "n_train": 59108,
   "n_test_benign": 19703,
-  "n_test_attack": 738377
+  "n_test_attack": 738377,
+  "n_scored_samples": 758080,
+  "inference_time_seconds": 41.60433,
+  "throughput_samples_per_second": 18221.1805
 }

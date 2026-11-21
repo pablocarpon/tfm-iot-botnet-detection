@@ -223,3 +223,5 @@ __marimo__/
 # Dataset almacenados localmente en los directorios data/raw y data/processed
 data/raw/*
 data/processed/*
+# Script para hacer pruebas rápidas
+/prueba.py
